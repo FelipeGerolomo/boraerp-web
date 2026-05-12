@@ -1,6 +1,7 @@
 "use client"
 
 import {
+  Aperture,
   BarChart3,
   CircleUser,
   Home,
@@ -13,7 +14,6 @@ import {
   Settings,
   TrendingUp,
 } from "lucide-react"
-import { CompanySwitcher } from "@/components/company-switcher"
 import {
   Avatar,
   AvatarFallback,
@@ -97,9 +97,11 @@ export function NavRail({
 
   return (
     <aside className="sticky top-0 z-20 flex h-svh w-[88px] shrink-0 flex-col border-r border-sidebar-border bg-sidebar">
-      {/* Company switcher */}
+      {/* App logo */}
       <div className="flex items-center justify-center px-3 pb-2 pt-4">
-        <CompanySwitcher />
+        <div className="flex size-10 items-center justify-center rounded-xl bg-foreground text-background">
+          <Aperture className="size-5" strokeWidth={2.25} />
+        </div>
       </div>
 
       {/* Navigation */}

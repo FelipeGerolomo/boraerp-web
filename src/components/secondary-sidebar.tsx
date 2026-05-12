@@ -233,7 +233,7 @@ export function SecondarySidebar({
     >
       <div className="flex h-svh w-64 flex-col">
         <div className="border-b p-2">
-          <CompanyProfile company={{ name: "Acme Inc", role: "Administrator" }} />
+          <CompanyProfile />
         </div>
         <div className="min-w-0 border-b px-4 pb-4 pt-4">
           <h2 className="truncate text-sm font-semibold leading-tight">
