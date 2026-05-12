@@ -1,0 +1,228 @@
+{
+  "openapi": "3.1.0",
+  "info": { "title": "OpenAPI definition", "version": "v0" },
+  "servers": [
+    { "url": "http://localhost:8080", "description": "Generated server url" }
+  ],
+  "paths": {
+    "/api/v1/auth/switch-company": {
+      "post": {
+        "tags": ["auth-controller"],
+        "operationId": "switchCompany",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SwitchCompanyRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/AuthTokenResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/select-company": {
+      "post": {
+        "tags": ["auth-controller"],
+        "operationId": "selectCompany",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SelectCompanyRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/AuthTokenResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/register": {
+      "post": {
+        "tags": ["auth-controller"],
+        "operationId": "register",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/RegisterRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/RegisterResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/logout": {
+      "post": {
+        "tags": ["auth-controller"],
+        "operationId": "logout",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/LogoutResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "tags": ["auth-controller"],
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LoginRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/LoginResponse" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SwitchCompanyRequest": {
+        "type": "object",
+        "properties": { "companyId": { "type": "string", "format": "uuid" } },
+        "required": ["companyId"]
+      },
+      "AuthTokenResponse": {
+        "type": "object",
+        "properties": {
+          "accessToken": { "type": "string" },
+          "expiresAt": { "type": "string", "format": "date-time" },
+          "user": { "$ref": "#/components/schemas/UserSummaryResponse" },
+          "company": { "$ref": "#/components/schemas/CompanySummaryResponse" }
+        }
+      },
+      "CompanySummaryResponse": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string", "format": "uuid" },
+          "name": { "type": "string" }
+        }
+      },
+      "UserSummaryResponse": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string", "format": "uuid" },
+          "firstName": { "type": "string" },
+          "lastName": { "type": "string" },
+          "email": { "type": "string" }
+        }
+      },
+      "SelectCompanyRequest": {
+        "type": "object",
+        "properties": {
+          "sessionToken": { "type": "string", "minLength": 1 },
+          "companyId": { "type": "string", "format": "uuid" }
+        },
+        "required": ["companyId", "sessionToken"]
+      },
+      "RegisterRequest": {
+        "type": "object",
+        "properties": {
+          "firstName": { "type": "string", "maxLength": 120, "minLength": 0 },
+          "lastName": { "type": "string", "maxLength": 120, "minLength": 0 },
+          "phone": { "type": "string", "maxLength": 30, "minLength": 0 },
+          "companyName": { "type": "string", "maxLength": 180, "minLength": 0 },
+          "cnpj": { "type": "string", "maxLength": 14, "minLength": 14 },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 255,
+            "minLength": 0
+          },
+          "password": { "type": "string", "maxLength": 255, "minLength": 8 }
+        },
+        "required": [
+          "cnpj",
+          "companyName",
+          "email",
+          "firstName",
+          "lastName",
+          "password"
+        ]
+      },
+      "RegisterResponse": {
+        "type": "object",
+        "properties": {
+          "userId": { "type": "string", "format": "uuid" },
+          "companyId": { "type": "string", "format": "uuid" },
+          "message": { "type": "string" }
+        }
+      },
+      "LogoutResponse": {
+        "type": "object",
+        "properties": { "message": { "type": "string" } }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 255,
+            "minLength": 0
+          },
+          "password": { "type": "string", "maxLength": 255, "minLength": 0 }
+        },
+        "required": ["email", "password"]
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "requiresCompanySelection": { "type": "boolean" },
+          "accessToken": { "type": "string" },
+          "expiresAt": { "type": "string", "format": "date-time" },
+          "sessionToken": { "type": "string" },
+          "user": { "$ref": "#/components/schemas/UserSummaryResponse" },
+          "company": { "$ref": "#/components/schemas/CompanySummaryResponse" },
+          "companies": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/CompanySummaryResponse" }
+          }
+        }
+      }
+    }
+  }
+}
