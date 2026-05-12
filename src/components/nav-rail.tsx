@@ -72,7 +72,7 @@ function RailButton({
         className={cn(
           "flex size-9 items-center justify-center rounded-xl transition-colors",
           active
-            ? "bg-foreground text-background shadow-sm"
+            ? "bg-primary text-primary-foreground shadow-sm"
             : "bg-transparent group-hover:bg-background group-hover:shadow-sm",
         )}
       >
@@ -96,7 +96,7 @@ export function NavRail({
   const setActive = onValueChange
 
   return (
-    <aside className="sticky top-0 z-20 flex h-svh w-[88px] shrink-0 flex-col bg-sidebar">
+    <aside className="sticky top-0 z-20 flex h-svh w-[88px] shrink-0 flex-col border-r border-sidebar-border bg-sidebar">
       {/* App / logo */}
       <div className="flex items-center justify-center px-3 pb-2 pt-4">
         <div className="flex size-10 items-center justify-center rounded-xl bg-foreground text-background">

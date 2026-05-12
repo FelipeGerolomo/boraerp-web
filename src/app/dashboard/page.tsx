@@ -1,17 +1,34 @@
 import { DashboardShell, SidebarToggle } from "@/components/dashboard-shell"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
 import { Separator } from "@/components/ui/separator"
 
 export default function Page() {
   return (
     <DashboardShell>
-      <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+      <header className="flex h-16 shrink-0 items-center gap-2 px-4">
         <SidebarToggle />
         <Separator
           orientation="vertical"
           className="mr-1 data-vertical:h-4 data-vertical:self-auto"
         />
-        <h1 className="text-base font-semibold">Overview</h1>
-        <span className="text-sm text-muted-foreground">/ Home</span>
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem className="hidden md:block">
+              <BreadcrumbLink href="#">Build Your Application</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator className="hidden md:block" />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
       </header>
       <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-6">
         <div className="grid auto-rows-min gap-4 md:grid-cols-3">

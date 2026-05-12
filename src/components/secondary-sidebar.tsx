@@ -13,7 +13,6 @@ import {
   History,
   type LucideIcon,
   Newspaper,
-  PanelLeftClose,
   PieChart,
   Plus,
   Search,
@@ -218,11 +217,9 @@ const sections: Record<string, Section> = {
 export function SecondarySidebar({
   section,
   open,
-  onToggle,
 }: {
   section: string
   open: boolean
-  onToggle: () => void
 }) {
   const data = sections[section] ?? sections.Home
   const [active, setActive] = useState(data.groups[0]?.items[0]?.title ?? "")
@@ -231,39 +228,19 @@ export function SecondarySidebar({
     <aside
       data-state={open ? "open" : "closed"}
       className={cn(
-        "sticky top-0 z-10 hidden h-svh shrink-0 self-start overflow-hidden bg-sidebar transition-[width] duration-300 ease-in-out md:block",
-        open ? "w-64" : "w-0",
+        "sticky top-0 z-10 hidden h-svh shrink-0 self-start overflow-hidden bg-background transition-[width] duration-300 ease-in-out md:block",
+        open ? "w-64 border-r border-sidebar-border" : "w-0",
       )}
     >
       <div className="flex h-svh w-64 flex-col">
         <div className="flex flex-col gap-3 border-b px-4 pb-4 pt-5">
-          <div className="flex items-center justify-between gap-2">
-            <div className="min-w-0">
-              <h2 className="truncate text-sm font-semibold leading-tight">
-                {data.title}
-              </h2>
-              <p className="truncate text-xs text-muted-foreground">
-                {data.description}
-              </p>
-            </div>
-            <div className="flex shrink-0 items-center gap-0.5">
-              <Button
-                size="icon-sm"
-                variant="ghost"
-                className="size-7 text-muted-foreground"
-              >
-                <Plus />
-              </Button>
-              <Button
-                size="icon-sm"
-                variant="ghost"
-                onClick={onToggle}
-                aria-label="Collapse sidebar"
-                className="size-7 text-muted-foreground"
-              >
-                <PanelLeftClose />
-              </Button>
-            </div>
+          <div className="min-w-0">
+            <h2 className="truncate text-sm font-semibold leading-tight">
+              {data.title}
+            </h2>
+            <p className="truncate text-xs text-muted-foreground">
+              {data.description}
+            </p>
           </div>
           <div className="relative">
             <Search className="absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground" />
@@ -303,7 +280,7 @@ export function SecondarySidebar({
                     className={cn(
                       "size-4 shrink-0 transition-colors",
                       isActive
-                        ? "text-foreground"
+                        ? "text-primary"
                         : "text-muted-foreground group-hover:text-foreground",
                     )}
                   />
