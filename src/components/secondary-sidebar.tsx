@@ -15,7 +15,6 @@ import {
   Newspaper,
   PieChart,
   Plus,
-  Search,
   Send,
   Shield,
   Star,
@@ -26,8 +25,8 @@ import {
   Wallet,
 } from "lucide-react"
 import { useState } from "react"
+import { CompanyProfile } from "@/components/company-profile"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 
 type SubItem = { title: string; icon: LucideIcon; badge?: string }
@@ -233,22 +232,16 @@ export function SecondarySidebar({
       )}
     >
       <div className="flex h-svh w-64 flex-col">
-        <div className="flex flex-col gap-3 border-b px-4 pb-4 pt-5">
-          <div className="min-w-0">
-            <h2 className="truncate text-sm font-semibold leading-tight">
-              {data.title}
-            </h2>
-            <p className="truncate text-xs text-muted-foreground">
-              {data.description}
-            </p>
-          </div>
-          <div className="relative">
-            <Search className="absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground" />
-            <Input
-              placeholder="Search…"
-              className="h-8 bg-muted/40 pl-8 text-sm"
-            />
-          </div>
+        <div className="border-b p-2">
+          <CompanyProfile company={{ name: "Acme Inc", role: "Administrator" }} />
+        </div>
+        <div className="min-w-0 border-b px-4 pb-4 pt-4">
+          <h2 className="truncate text-sm font-semibold leading-tight">
+            {data.title}
+          </h2>
+          <p className="truncate text-xs text-muted-foreground">
+            {data.description}
+          </p>
         </div>
 
         <nav className="flex flex-1 flex-col gap-5 overflow-y-auto px-3 py-4">
@@ -306,15 +299,15 @@ export function SecondarySidebar({
         ))}
       </nav>
 
-      <div className="border-t p-3">
-        <div className="rounded-xl bg-muted/40 p-3">
-          <p className="text-xs font-medium">Free plan</p>
-          <p className="mt-0.5 text-[11px] text-muted-foreground">
-            7 days left in trial
-          </p>
-          <Button size="sm" className="mt-2.5 h-7 w-full text-xs">
-            Upgrade plan
-          </Button>
+        <div className="border-t p-3">
+          <div className="rounded-xl bg-muted/40 p-3">
+            <p className="text-xs font-medium">Free plan</p>
+            <p className="mt-0.5 text-[11px] text-muted-foreground">
+              7 days left in trial
+            </p>
+            <Button size="sm" className="mt-2.5 h-7 w-full text-xs">
+              Upgrade plan
+            </Button>
           </div>
         </div>
       </div>
