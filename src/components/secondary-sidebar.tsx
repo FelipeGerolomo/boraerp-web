@@ -231,8 +231,8 @@ export function SecondarySidebar({
     <aside
       data-state={open ? "open" : "closed"}
       className={cn(
-        "sticky top-0 hidden h-svh shrink-0 self-start overflow-hidden bg-background transition-[width] duration-300 ease-in-out md:block",
-        open ? "w-64 border-r" : "w-0 border-r-0",
+        "sticky top-0 z-10 hidden h-svh shrink-0 self-start overflow-hidden bg-sidebar transition-[width] duration-300 ease-in-out md:block",
+        open ? "w-64" : "w-0",
       )}
     >
       <div className="flex h-svh w-64 flex-col">

@@ -13,7 +13,7 @@ export default function Page() {
         <h1 className="text-base font-semibold">Overview</h1>
         <span className="text-sm text-muted-foreground">/ Home</span>
       </header>
-      <div className="flex flex-1 flex-col gap-4 p-6">
+      <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-6">
         <div className="grid auto-rows-min gap-4 md:grid-cols-3">
           <div className="aspect-video rounded-xl bg-muted/50" />
           <div className="aspect-video rounded-xl bg-muted/50" />

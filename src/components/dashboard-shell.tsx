@@ -64,10 +64,12 @@ export function DashboardShell({ children }: { children: ReactNode }) {
 
   return (
     <SidebarCtx.Provider value={{ open, toggle, setOpen }}>
-      <div className="flex min-h-svh bg-background">
+      <div className="flex h-svh overflow-hidden bg-sidebar">
         <NavRail value={section} onValueChange={setSection} />
         <SecondarySidebar section={section} open={open} onToggle={toggle} />
-        <main className="flex min-w-0 flex-1 flex-col">{children}</main>
+        <main className="m-2 flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden rounded-xl border bg-background shadow-sm">
+          {children}
+        </main>
       </div>
     </SidebarCtx.Provider>
   )
