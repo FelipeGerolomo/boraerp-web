@@ -8,9 +8,10 @@ import {
   useEffect,
   useState,
 } from "react"
-import { NavRail } from "@/components/nav-rail"
-import { SecondarySidebar } from "@/components/secondary-sidebar"
+import { DashboardBreadcrumb } from "@/components/dashboard/dashboard-breadcrumb"
+import { NavRail, SecondarySidebar } from "@/components/sidebar"
 import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
 
 type SidebarContext = {
@@ -46,8 +47,12 @@ export function SidebarToggle({ className }: { className?: string }) {
   )
 }
 
+/**
+ * Dashboard layout: navigation rail + contextual sidebar + content surface
+ * (sticky header with breadcrumb, scrollable body). Mount it from the dashboard
+ * route layout; pages render only their content into `children`.
+ */
 export function DashboardShell({ children }: { children: ReactNode }) {
-  const [section, setSection] = useState("Home")
   const [open, setOpen] = useState(true)
   const toggle = () => setOpen((o) => !o)
 
@@ -55,7 +60,7 @@ export function DashboardShell({ children }: { children: ReactNode }) {
     function onKey(e: KeyboardEvent) {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "b") {
         e.preventDefault()
-        toggle()
+        setOpen((o) => !o)
       }
     }
     window.addEventListener("keydown", onKey)
@@ -65,10 +70,20 @@ export function DashboardShell({ children }: { children: ReactNode }) {
   return (
     <SidebarCtx.Provider value={{ open, toggle, setOpen }}>
       <div className="flex h-svh overflow-hidden bg-sidebar">
-        <NavRail value={section} onValueChange={setSection} />
-        <SecondarySidebar section={section} open={open} />
+        <NavRail />
+        <SecondarySidebar open={open} />
         <main className="m-2 flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden rounded-xl border bg-background shadow-sm">
-          {children}
+          <header className="flex h-16 shrink-0 items-center gap-2 px-4">
+            <SidebarToggle />
+            <Separator
+              orientation="vertical"
+              className="mr-1 data-vertical:h-4 data-vertical:self-auto"
+            />
+            <DashboardBreadcrumb />
+          </header>
+          <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-6">
+            {children}
+          </div>
         </main>
       </div>
     </SidebarCtx.Provider>

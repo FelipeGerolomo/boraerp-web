@@ -28,13 +28,7 @@ function getInitials(name: string) {
   return letters.join("").toUpperCase()
 }
 
-function CompanyBadge({
-  name,
-  className,
-}: {
-  name: string
-  className?: string
-}) {
+function CompanyBadge({ name, className }: { name: string; className?: string }) {
   return (
     <span
       aria-hidden
@@ -59,7 +53,8 @@ function CompanyIdentity({ company }: { company: Company }) {
   )
 }
 
-export function CompanyProfile() {
+/** Active-company indicator + switcher, shown at the top of the contextual sidebar. */
+export function CompanySwitcher() {
   const [active, setActive] = useState<Company>(companies[0])
 
   return (

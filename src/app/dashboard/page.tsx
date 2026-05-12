@@ -1,43 +1,6 @@
-import { DashboardShell, SidebarToggle } from "@/components/dashboard-shell"
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { Separator } from "@/components/ui/separator"
+import { redirect } from "next/navigation"
+import { defaultDashboardRoute } from "@/config/navigation"
 
-export default function Page() {
-  return (
-    <DashboardShell>
-      <header className="flex h-16 shrink-0 items-center gap-2 px-4">
-        <SidebarToggle />
-        <Separator
-          orientation="vertical"
-          className="mr-1 data-vertical:h-4 data-vertical:self-auto"
-        />
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem className="hidden md:block">
-              <BreadcrumbLink href="#">Build Your Application</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator className="hidden md:block" />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-      </header>
-      <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-6">
-        <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-          <div className="aspect-video rounded-xl bg-muted/50" />
-          <div className="aspect-video rounded-xl bg-muted/50" />
-          <div className="aspect-video rounded-xl bg-muted/50" />
-        </div>
-        <div className="min-h-[60vh] flex-1 rounded-xl bg-muted/50" />
-      </div>
-    </DashboardShell>
-  )
+export default function DashboardIndexPage() {
+  redirect(defaultDashboardRoute())
 }
