@@ -5,12 +5,15 @@ import {
   Bell,
   Bookmark,
   Briefcase,
+  CalendarDays,
   CandlestickChart,
   ChevronRight,
   CreditCard,
   Filter,
   Gauge,
   History,
+  Inbox,
+  ListTodo,
   type LucideIcon,
   Newspaper,
   PieChart,
@@ -24,16 +27,15 @@ import {
   Users,
   Wallet,
 } from "lucide-react"
-import { type ReactNode, useState } from "react"
+import { useState } from "react"
 import { CompanyProfile } from "@/components/company-profile"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-type SubChild = { title: string; badge?: string }
+type SubChild = { title: string }
 type SubItem = {
   title: string
   icon: LucideIcon
-  badge?: string
   children?: SubChild[]
 }
 type SubGroup = { label?: string; items: SubItem[] }
@@ -71,9 +73,8 @@ const sections: Record<string, Section> = {
           {
             title: "Notifications",
             icon: Bell,
-            badge: "3",
             children: [
-              { title: "Unread", badge: "3" },
+              { title: "Unread" },
               { title: "All" },
               { title: "Preferences" },
             ],
@@ -97,6 +98,14 @@ const sections: Record<string, Section> = {
             icon: Bookmark,
             children: [{ title: "My views" }, { title: "Shared with me" }],
           },
+        ],
+      },
+      {
+        label: "Quick links",
+        items: [
+          { title: "Calendar", icon: CalendarDays },
+          { title: "Tasks", icon: ListTodo },
+          { title: "Inbox", icon: Inbox },
         ],
       },
     ],
@@ -471,8 +480,7 @@ const sections: Record<string, Section> = {
           {
             title: "Pending invites",
             icon: History,
-            badge: "2",
-            children: [{ title: "Sent", badge: "2" }, { title: "Expired" }],
+            children: [{ title: "Sent" }, { title: "Expired" }],
           },
           {
             title: "Members",
@@ -522,14 +530,6 @@ const leafRowClass =
   "group flex w-full items-center gap-2.5 rounded-lg px-2 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent/10 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
 const activeRowClass = "bg-accent/12 font-medium text-foreground hover:bg-accent/12"
 
-function Badge({ children }: { children: ReactNode }) {
-  return (
-    <span className="rounded-full bg-accent/15 px-1.5 py-0.5 text-[10px] font-medium text-foreground">
-      {children}
-    </span>
-  )
-}
-
 function NavItem({
   item,
   active,
@@ -573,19 +573,11 @@ function NavItem({
           )}
         />
         <span className="flex-1 truncate text-left">{item.title}</span>
-        {item.badge && <Badge>{item.badge}</Badge>}
-        {hasChildren ? (
+        {hasChildren && (
           <ChevronRight
             className={cn(
               "size-3.5 shrink-0 text-muted-foreground transition-transform",
               expanded && "rotate-90",
-            )}
-          />
-        ) : (
-          <ChevronRight
-            className={cn(
-              "size-3.5 shrink-0 text-muted-foreground/50 opacity-0 transition-opacity group-hover:opacity-100",
-              isActive && "opacity-100",
             )}
           />
         )}
@@ -621,7 +613,6 @@ function NavItem({
                     <span className="flex-1 truncate text-left">
                       {child.title}
                     </span>
-                    {child.badge && <Badge>{child.badge}</Badge>}
                   </button>
                 )
               })}
