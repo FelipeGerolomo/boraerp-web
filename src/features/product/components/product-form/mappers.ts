@@ -21,6 +21,8 @@ export type ProductFormValues = {
   originCode: string
   barcode: string
   unitOfMeasureId: string
+  commercialUnitId: string
+  taxableUnitId: string
   ncm: string
   sku: string
   cest: string
@@ -56,7 +58,6 @@ export type ProductFormValues = {
   prices: ProductPrice[]
   costPrice?: number
   gtinTaxable: string
-  taxableUnitId: string
   conversionFactor?: number
   ipiFrameCode: string
   ipiLegalFrameCode: string
@@ -72,6 +73,8 @@ export function createEmptyProductFormValues(): ProductFormValues {
     originCode: "",
     barcode: "",
     unitOfMeasureId: "",
+    commercialUnitId: "",
+    taxableUnitId: "",
     ncm: "",
     sku: "",
     cest: "",
@@ -95,7 +98,6 @@ export function createEmptyProductFormValues(): ProductFormValues {
     kitItems: [],
     prices: [],
     gtinTaxable: "",
-    taxableUnitId: "",
     ipiFrameCode: "",
     ipiLegalFrameCode: "",
     extipi: "",
@@ -112,6 +114,8 @@ export function mapProductDetailToFormValues(
     originCode: detail.general?.fiscal?.originCode ?? "",
     barcode: detail.barcode ?? "",
     unitOfMeasureId: detail.unitOfMeasure?.id ?? "",
+    commercialUnitId: detail.general?.fiscal?.commercialUnitId ?? "",
+    taxableUnitId: detail.general?.fiscal?.taxableUnitId ?? "",
     ncm: detail.general?.fiscal?.ncm ?? "",
     sku: detail.sku ?? "",
     cest: detail.general?.fiscal?.cest ?? "",
@@ -147,7 +151,6 @@ export function mapProductDetailToFormValues(
     prices: detail.prices ?? [],
     costPrice: detail.general?.price?.costPrice,
     gtinTaxable: detail.general?.fiscal?.gtinTaxable ?? "",
-    taxableUnitId: detail.general?.fiscal?.taxableUnitId ?? "",
     conversionFactor: detail.general?.fiscal?.conversionFactor,
     ipiFrameCode: detail.general?.fiscal?.ipiFrameCode ?? "",
     ipiLegalFrameCode: detail.general?.fiscal?.ipiLegalFrameCode ?? "",
@@ -161,6 +164,12 @@ function textOrUndefined(value: string) {
   return trimmed.length > 0 ? trimmed : undefined
 }
 
+function hasMarketplaceChannelId(
+  item: ProductMarketplaceListing,
+): item is ProductMarketplaceListing & { marketplaceChannelId: number } {
+  return typeof item.marketplaceChannelId === "number"
+}
+
 export function toGeneralPayload(values: ProductFormValues): UpdateProductGeneralRequest {
   return {
     name: textOrUndefined(values.name),
@@ -171,6 +180,8 @@ export function toGeneralPayload(values: ProductFormValues): UpdateProductGenera
     shortDescription: textOrUndefined(values.shortDescription),
     description: textOrUndefined(values.description),
     unitOfMeasureId: textOrUndefined(values.unitOfMeasureId),
+    commercialUnitId: textOrUndefined(values.commercialUnitId),
+    taxableUnitId: textOrUndefined(values.taxableUnitId),
     spedItemTypeCode: textOrUndefined(values.spedItemTypeCode),
     originCode: textOrUndefined(values.originCode),
     ncm: textOrUndefined(values.ncm),
@@ -229,15 +240,17 @@ export function toMarketplacePayload(
   values: ProductFormValues,
 ): ReplaceMarketplaceListingsRequest {
   return {
-    listings: values.marketplaceListings.map((item) => ({
-      marketplaceChannelId: Number(item.marketplaceChannelId),
-      externalListingId: textOrUndefined(item.externalListingId ?? ""),
-      externalSku: textOrUndefined(item.externalSku ?? ""),
-      title: textOrUndefined(item.title ?? ""),
-      description: textOrUndefined(item.description ?? ""),
-      listingUrl: textOrUndefined(item.listingUrl ?? ""),
-      active: item.active ?? false,
-    })),
+    listings: values.marketplaceListings
+      .filter(hasMarketplaceChannelId)
+      .map((item) => ({
+        marketplaceChannelId: item.marketplaceChannelId,
+        externalListingId: textOrUndefined(item.externalListingId ?? ""),
+        externalSku: textOrUndefined(item.externalSku ?? ""),
+        title: textOrUndefined(item.title ?? ""),
+        description: textOrUndefined(item.description ?? ""),
+        listingUrl: textOrUndefined(item.listingUrl ?? ""),
+        active: item.active ?? false,
+      })),
   }
 }
 
@@ -279,7 +292,6 @@ export function toCostsPayload(values: ProductFormValues): UpdateProductCostsReq
 export function toOtherPayload(values: ProductFormValues): UpdateProductOtherRequest {
   return {
     gtinTaxable: textOrUndefined(values.gtinTaxable),
-    taxableUnitId: textOrUndefined(values.taxableUnitId),
     conversionFactor: values.conversionFactor,
     ipiFrameCode: textOrUndefined(values.ipiFrameCode),
     ipiLegalFrameCode: textOrUndefined(values.ipiLegalFrameCode),

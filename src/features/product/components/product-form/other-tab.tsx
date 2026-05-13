@@ -13,15 +13,6 @@ export function ProductOtherTab({ values, setValue }: ProductFormTabProps) {
         />
       </Field>
 
-      <Field>
-        <FieldLabel>Unidade tributável</FieldLabel>
-        <Input
-          value={values.taxableUnitId}
-          onChange={(event) => setValue("taxableUnitId", event.target.value)}
-          placeholder="UUID da unidade tributável"
-        />
-      </Field>
-
       <div className="grid gap-4 md:grid-cols-2">
         <Field>
           <FieldLabel>Fator de conversão</FieldLabel>

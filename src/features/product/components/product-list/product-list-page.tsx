@@ -8,14 +8,13 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select"
 import { Skeleton } from "@/components/ui/skeleton"
+import {
+  ProductStatusAutocomplete,
+  ProductTypeAutocomplete,
+} from "@/features/lookup/components"
 import { archiveProductRequest } from "@/features/product/api/client"
 import { productKeys, useProducts } from "@/features/product/hooks"
-import {
-  PRODUCT_STATUS_OPTIONS,
-  PRODUCT_TYPE_OPTIONS,
-} from "@/features/product/types"
 import { ProductTable } from "./product-table"
 
 export function ProductListPage() {
@@ -71,35 +70,23 @@ export function ProductListPage() {
               placeholder="Buscar por nome, SKU ou código"
             />
 
-            <NativeSelect
+            <ProductStatusAutocomplete
               value={status}
-              onChange={(event) => {
+              placeholder="Todos os status"
+              onChange={(value) => {
                 setPage(0)
-                setStatus(event.target.value)
+                setStatus(value ?? "")
               }}
-            >
-              <NativeSelectOption value="">Todos os status</NativeSelectOption>
-              {PRODUCT_STATUS_OPTIONS.map((option) => (
-                <NativeSelectOption key={option.value} value={option.value}>
-                  {option.label}
-                </NativeSelectOption>
-              ))}
-            </NativeSelect>
+            />
 
-            <NativeSelect
+            <ProductTypeAutocomplete
               value={type}
-              onChange={(event) => {
+              placeholder="Todos os tipos"
+              onChange={(value) => {
                 setPage(0)
-                setType(event.target.value)
+                setType(value ?? "")
               }}
-            >
-              <NativeSelectOption value="">Todos os tipos</NativeSelectOption>
-              {PRODUCT_TYPE_OPTIONS.map((option) => (
-                <NativeSelectOption key={option.value} value={option.value}>
-                  {option.label}
-                </NativeSelectOption>
-              ))}
-            </NativeSelect>
+            />
           </div>
 
           {listQuery.isLoading && (

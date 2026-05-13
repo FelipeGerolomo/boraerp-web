@@ -1,15 +1,14 @@
 import { Input } from "@/components/ui/input"
-import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select"
 import { Switch } from "@/components/ui/switch"
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import {
-  ORIGIN_CODE_OPTIONS,
-  PACKAGE_TYPE_OPTIONS,
-  PRODUCT_STATUS_OPTIONS,
-  PRODUCT_TYPE_OPTIONS,
-  SPED_ITEM_TYPE_OPTIONS,
-  UNIT_OPTIONS,
-} from "@/features/product/types"
+  PackageTypeAutocomplete,
+  ProductOriginCodeAutocomplete,
+  ProductStatusAutocomplete,
+  ProductTypeAutocomplete,
+  SpedItemTypeAutocomplete,
+  UnitOfMeasureAutocomplete,
+} from "@/features/lookup/components"
 import type { ProductFormTabProps } from "./types"
 
 function NumberInput({
@@ -53,64 +52,36 @@ export function ProductGeneralTab({ values, setValue }: ProductFormTabProps) {
       <div className="grid gap-4 md:grid-cols-2">
         <Field>
           <FieldLabel>Tipo do produto</FieldLabel>
-          <NativeSelect
+          <ProductTypeAutocomplete
             value={values.productTypeCode}
-            onChange={(event) => setValue("productTypeCode", event.target.value)}
-          >
-            <NativeSelectOption value="">Selecione</NativeSelectOption>
-            {PRODUCT_TYPE_OPTIONS.map((option) => (
-              <NativeSelectOption key={option.value} value={option.value}>
-                {option.label}
-              </NativeSelectOption>
-            ))}
-          </NativeSelect>
+            onChange={(value) => setValue("productTypeCode", value ?? "")}
+          />
         </Field>
 
         <Field>
           <FieldLabel>Status</FieldLabel>
-          <NativeSelect
+          <ProductStatusAutocomplete
             value={values.statusCode}
-            onChange={(event) => setValue("statusCode", event.target.value)}
-          >
-            <NativeSelectOption value="">Selecione</NativeSelectOption>
-            {PRODUCT_STATUS_OPTIONS.map((option) => (
-              <NativeSelectOption key={option.value} value={option.value}>
-                {option.label}
-              </NativeSelectOption>
-            ))}
-          </NativeSelect>
+            onChange={(value) => setValue("statusCode", value ?? "")}
+          />
         </Field>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
         <Field>
           <FieldLabel>Tipo do item SPED</FieldLabel>
-          <NativeSelect
+          <SpedItemTypeAutocomplete
             value={values.spedItemTypeCode}
-            onChange={(event) => setValue("spedItemTypeCode", event.target.value)}
-          >
-            <NativeSelectOption value="">Selecione</NativeSelectOption>
-            {SPED_ITEM_TYPE_OPTIONS.map((option) => (
-              <NativeSelectOption key={option.value} value={option.value}>
-                {option.label}
-              </NativeSelectOption>
-            ))}
-          </NativeSelect>
+            onChange={(value) => setValue("spedItemTypeCode", value ?? "")}
+          />
         </Field>
 
         <Field>
           <FieldLabel>Origem do produto (ICMS)</FieldLabel>
-          <NativeSelect
+          <ProductOriginCodeAutocomplete
             value={values.originCode}
-            onChange={(event) => setValue("originCode", event.target.value)}
-          >
-            <NativeSelectOption value="">Selecione</NativeSelectOption>
-            {ORIGIN_CODE_OPTIONS.map((option) => (
-              <NativeSelectOption key={option.value} value={option.value}>
-                {option.label}
-              </NativeSelectOption>
-            ))}
-          </NativeSelect>
+            onChange={(value) => setValue("originCode", value ?? "")}
+          />
         </Field>
       </div>
 
@@ -140,7 +111,7 @@ export function ProductGeneralTab({ values, setValue }: ProductFormTabProps) {
         </Field>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2">
         <Field>
           <FieldLabel>CEST</FieldLabel>
           <Input
@@ -150,33 +121,37 @@ export function ProductGeneralTab({ values, setValue }: ProductFormTabProps) {
         </Field>
 
         <Field>
+          <FieldLabel>Tipo de embalagem</FieldLabel>
+          <PackageTypeAutocomplete
+            value={values.packageTypeCode}
+            onChange={(value) => setValue("packageTypeCode", value ?? "")}
+          />
+        </Field>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-3">
+        <Field>
           <FieldLabel>Unidade de medida</FieldLabel>
-          <NativeSelect
+          <UnitOfMeasureAutocomplete
             value={values.unitOfMeasureId}
-            onChange={(event) => setValue("unitOfMeasureId", event.target.value)}
-          >
-            <NativeSelectOption value="">Selecione</NativeSelectOption>
-            {UNIT_OPTIONS.map((option) => (
-              <NativeSelectOption key={option.value} value={option.value}>
-                {option.label}
-              </NativeSelectOption>
-            ))}
-          </NativeSelect>
+            onChange={(value) => setValue("unitOfMeasureId", value ?? "")}
+          />
         </Field>
 
         <Field>
-          <FieldLabel>Tipo de embalagem</FieldLabel>
-          <NativeSelect
-            value={values.packageTypeCode}
-            onChange={(event) => setValue("packageTypeCode", event.target.value)}
-          >
-            <NativeSelectOption value="">Selecione</NativeSelectOption>
-            {PACKAGE_TYPE_OPTIONS.map((option) => (
-              <NativeSelectOption key={option.value} value={option.value}>
-                {option.label}
-              </NativeSelectOption>
-            ))}
-          </NativeSelect>
+          <FieldLabel>Unidade comercial</FieldLabel>
+          <UnitOfMeasureAutocomplete
+            value={values.commercialUnitId}
+            onChange={(value) => setValue("commercialUnitId", value ?? "")}
+          />
+        </Field>
+
+        <Field>
+          <FieldLabel>Unidade tributável</FieldLabel>
+          <UnitOfMeasureAutocomplete
+            value={values.taxableUnitId}
+            onChange={(value) => setValue("taxableUnitId", value ?? "")}
+          />
         </Field>
       </div>
 

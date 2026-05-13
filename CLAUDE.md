@@ -100,14 +100,11 @@ When working with shadcn components, use the CLI (`npx shadcn@latest docs <compo
   - shadcn/ui components for UI composition.
 - Keep active tab in URL query param (`?tab=...`) when practical for form/detail screens.
 
-### Product reference data TODO
+### Product lookup UI standards
 
-- `docs/api-docs.json` currently does not expose dedicated lookup endpoints for:
-  - product types/status
-  - SPED item types
-  - origin codes
-  - units/package types
-  - marketplace channels
-  - price lists
-  - categories/brands
-- Until backend lookup endpoints are available, maintain temporary centralized fallback options in `src/features/product/types/lookups.ts`. Do not duplicate hardcoded options across components.
+- Lookup/reference values must come from backend lookup endpoints (see `docs/api-docs.json`), not hardcoded arrays in form components.
+- Do not hardcode product lookup options in forms (`product type`, `status`, `SPED`, `origin`, `units`, `package type`, `marketplace channel`).
+- Use TanStack Query hooks for lookup data fetching and caching.
+- Use autocomplete/combobox UI patterns for lookup fields instead of native `<select>` controls.
+- Create one dedicated reusable lookup component per lookup type.
+- Lookup components must stay generic/reusable and must not include product form business rules.

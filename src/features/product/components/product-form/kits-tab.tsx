@@ -1,7 +1,12 @@
 import { Plus, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Empty } from "@/components/ui/empty"
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyTitle,
+} from "@/components/ui/empty"
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import type { ProductKitItem } from "@/features/product/types"
 import type { ProductFormTabProps } from "./types"
@@ -30,10 +35,15 @@ export function ProductKitsTab({ values, setValue }: ProductFormTabProps) {
 
   if (!isKit) {
     return (
-      <Empty
-        title="Itens de kit disponíveis apenas para tipo KIT"
-        description="Defina o tipo do produto como KIT na aba Dados gerais para cadastrar os itens que compõem o kit."
-      />
+      <Empty>
+        <EmptyHeader>
+          <EmptyTitle>Itens de kit disponíveis apenas para tipo KIT</EmptyTitle>
+          <EmptyDescription>
+            Defina o tipo do produto como KIT na aba Dados gerais para cadastrar
+            os itens que compõem o kit.
+          </EmptyDescription>
+        </EmptyHeader>
+      </Empty>
     )
   }
 

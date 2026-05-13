@@ -1,10 +1,10 @@
 import { Plus, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select"
 import { Switch } from "@/components/ui/switch"
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
-import { MARKETPLACE_CHANNEL_OPTIONS, type ProductMarketplaceListing } from "@/features/product/types"
+import { MarketplaceChannelAutocomplete } from "@/features/lookup/components"
+import type { ProductMarketplaceListing } from "@/features/product/types"
 import type { ProductFormTabProps } from "./types"
 
 export function ProductMarketplaceTab({ values, setValue }: ProductFormTabProps) {
@@ -23,7 +23,6 @@ export function ProductMarketplaceTab({ values, setValue }: ProductFormTabProps)
     setValue("marketplaceListings", [
       ...listings,
       {
-        marketplaceChannelId: Number(MARKETPLACE_CHANNEL_OPTIONS[0]?.value ?? 1),
         active: true,
       },
     ])
@@ -53,25 +52,23 @@ export function ProductMarketplaceTab({ values, setValue }: ProductFormTabProps)
       )}
 
       {listings.map((listing, index) => (
-        <div key={`${index}-${listing.marketplaceChannelId}`} className="rounded-xl border p-4">
+        <div
+          key={`${index}-${listing.id ?? listing.marketplaceChannelId ?? "novo"}`}
+          className="rounded-xl border p-4"
+        >
           <div className="grid gap-4 md:grid-cols-2">
             <Field>
               <FieldLabel>Canal</FieldLabel>
-              <NativeSelect
-                value={String(listing.marketplaceChannelId)}
-                onChange={(event) =>
+              <MarketplaceChannelAutocomplete
+                value={listing.marketplaceChannelId}
+                onChange={(value) =>
                   updateItem(index, {
                     ...listing,
-                    marketplaceChannelId: Number(event.target.value),
+                    marketplaceChannelId: value,
                   })
                 }
-              >
-                {MARKETPLACE_CHANNEL_OPTIONS.map((option) => (
-                  <NativeSelectOption key={option.value} value={option.value}>
-                    {option.label}
-                  </NativeSelectOption>
-                ))}
-              </NativeSelect>
+                placeholder="Selecione o canal"
+              />
             </Field>
 
             <Field orientation="horizontal">

@@ -79,7 +79,6 @@ function hasFilledComplementary(values: ProductFormValues) {
 function hasFilledOther(values: ProductFormValues) {
   return Boolean(
     values.gtinTaxable.trim() ||
-      values.taxableUnitId.trim() ||
       values.conversionFactor != null ||
       values.ipiFrameCode.trim() ||
       values.ipiLegalFrameCode.trim() ||

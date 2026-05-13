@@ -140,7 +140,7 @@ export type ProductAttribute = {
 
 export type ProductMarketplaceListing = {
   id?: string
-  marketplaceChannelId: number
+  marketplaceChannelId?: number
   marketplaceChannelCode?: string
   externalListingId?: string
   externalSku?: string
