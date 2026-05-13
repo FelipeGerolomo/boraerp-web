@@ -1,19 +1,29 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { LogOut } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useAuthSession } from "@/auth/hooks/use-auth-session";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   defaultRouteForSection,
   isSectionActive,
   type Permission,
   type RailItem,
   sidebarConfig,
-} from "@/config/navigation"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { cn } from "@/lib/utils"
+} from "@/config/navigation";
+import { cn } from "@/lib/utils";
 
 function RailButton({ item, active }: { item: RailItem; active: boolean }) {
-  const Icon = item.icon
+  const Icon = item.icon;
   return (
     <Link
       href={defaultRouteForSection(item.section)}
@@ -44,7 +54,7 @@ function RailButton({ item, active }: { item: RailItem; active: boolean }) {
         {item.title}
       </span>
     </Link>
-  )
+  );
 }
 
 /**
@@ -55,11 +65,15 @@ function RailButton({ item, active }: { item: RailItem; active: boolean }) {
 export function NavRail({
   can = () => true,
 }: {
-  can?: (permission: Permission) => boolean
+  can?: (permission: Permission) => boolean;
 }) {
-  const pathname = usePathname()
-  const Brand = sidebarConfig.brand.icon
-  const isVisible = (item: RailItem) => !item.permission || can(item.permission)
+  const pathname = usePathname();
+  const { session, logout, isLoggingOut } = useAuthSession();
+  const Brand = sidebarConfig.brand.icon;
+  const isVisible = (item: RailItem) =>
+    !item.permission || can(item.permission);
+  const initials =
+    `${session.user.firstName[0] ?? ""}${session.user.lastName[0] ?? ""}`.toUpperCase();
 
   const renderItem = (item: RailItem) => (
     <RailButton
@@ -67,9 +81,9 @@ export function NavRail({
       item={item}
       active={isSectionActive(pathname, item.section)}
     />
-  )
+  );
 
-  const utilities = sidebarConfig.railUtilities.filter(isVisible)
+  const utilities = sidebarConfig.railUtilities.filter(isVisible);
 
   return (
     <aside className="sticky top-0 z-20 flex h-svh w-[88px] shrink-0 flex-col border-r border-sidebar-border bg-sidebar">
@@ -86,8 +100,8 @@ export function NavRail({
       {/* Primary destinations */}
       <nav className="flex flex-1 flex-col gap-3 overflow-y-auto px-2.5 py-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {sidebarConfig.rail.map((group, groupIndex) => {
-          const items = group.filter(isVisible)
-          if (items.length === 0) return null
+          const items = group.filter(isVisible);
+          if (items.length === 0) return null;
           return (
             <div key={items[0].section} className="flex flex-col gap-1">
               {groupIndex > 0 && (
@@ -95,7 +109,7 @@ export function NavRail({
               )}
               {items.map(renderItem)}
             </div>
-          )
+          );
         })}
       </nav>
 
@@ -103,16 +117,38 @@ export function NavRail({
       <div className="flex flex-col gap-1 px-2.5 pb-3">
         <div className="mx-3 mb-2 h-px bg-sidebar-border" />
         {utilities.map(renderItem)}
-        <button
-          type="button"
-          className="mt-2 flex items-center justify-center rounded-xl p-1.5 transition-colors hover:bg-accent/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-        >
-          <Avatar className="size-9 rounded-xl">
-            <AvatarImage src="https://github.com/shadcn.png" alt="User" />
-            <AvatarFallback className="rounded-xl">FG</AvatarFallback>
-          </Avatar>
-        </button>
+        <DropdownMenu>
+          <DropdownMenuTrigger className="mt-2 flex items-center justify-center rounded-xl p-1.5 transition-colors hover:bg-accent/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring data-popup-open:bg-accent/10">
+            <Avatar className="size-9 rounded-xl">
+              <AvatarFallback className="rounded-xl">{initials}</AvatarFallback>
+            </Avatar>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            side="right"
+            align="end"
+            sideOffset={12}
+            className="w-56"
+          >
+            <DropdownMenuLabel className="flex flex-col gap-0.5">
+              <span className="truncate text-sm font-medium">
+                {session.user.firstName} {session.user.lastName}
+              </span>
+              <span className="truncate text-xs font-normal text-muted-foreground">
+                {session.user.email}
+              </span>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              disabled={isLoggingOut}
+              onClick={logout}
+              variant="destructive"
+            >
+              <LogOut />
+              {isLoggingOut ? "Logging out..." : "Log out"}
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </aside>
-  )
+  );
 }

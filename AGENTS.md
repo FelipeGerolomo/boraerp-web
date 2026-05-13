@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
 
 ## Commands
 
@@ -41,40 +41,3 @@ When working with shadcn components, use the CLI (`npx shadcn@latest docs <compo
 ## Layout
 
 `src/app/layout.tsx` wires three fonts as CSS variables: Geist (`--font-geist-sans`), Geist Mono (`--font-geist-mono`), and Inter (`--font-sans`, the active body font).
-
-## Authentication standards
-
-- Auth feature code lives under `src/auth/`:
-  - `api/` for request schemas and browser-side auth client calls to local route handlers.
-  - `components/` for auth forms and authenticated session provider.
-  - `hooks/` for session hooks (`useAuthSession`).
-  - `server/` for backend-auth service wrappers and route error mapping.
-  - `types/` for DTO/session typing sourced from `docs/api-docs.json`.
-- Backend calls use the centralized server API client in `src/lib/api/` (`apiRequest`) with:
-  - `API_BASE_URL` (or fallback `NEXT_PUBLIC_API_BASE_URL`) from environment variables.
-  - normalized JSON parsing and `ProblemDetail`-aware error mapping.
-  - shared authorization header injection through the `token` option.
-- Session storage strategy:
-  - use secure, HTTP-only cookies (`bora_access_token`, `bora_auth_session`, `bora_pending_company`).
-  - never store auth/session tokens in `localStorage`.
-  - all cookie reads/writes are centralized in `src/lib/session/cookies.ts`.
-- Route protection strategy:
-  - `middleware.ts` handles anonymous/authenticated/pending-company redirects for `/`, `/login`, `/signup`, `/select-company`, and `/dashboard/*`.
-  - dashboard layout enforces authenticated session server-side and injects `AuthSessionProvider`.
-- Multi-company authentication flow:
-  - login can return direct auth (single company) or pending company selection (multi-company).
-  - pending session uses short-lived HTTP-only cookie with `sessionToken` + allowed companies.
-  - `/select-company` finalizes authentication and creates company-scoped access token session.
-- Company switching behavior:
-  - company switcher in `src/components/sidebar/company-switcher.tsx` calls `/api/auth/switch-company`.
-  - on success, current company and access token are replaced and app state refreshes.
-- Logout behavior:
-  - client calls `/api/auth/logout`, backend revoke is attempted, and frontend session cookies are always cleared.
-  - user is redirected to `/login` after logout.
-- Form validation standard:
-  - use `zod` schemas from `src/auth/api/schemas.ts` as the single validation source.
-  - display field-level errors using shadcn `FieldError` and form-level errors via `Alert`.
-- Shadcn auth UI expectations:
-  - forms must use `FieldGroup` + `Field` composition.
-  - prefer semantic tokens and variants (no raw color overrides).
-  - use existing `Card`, `Button`, `Input`, `Alert`, and `Spinner` components for consistency.
