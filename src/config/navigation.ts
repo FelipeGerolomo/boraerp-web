@@ -21,6 +21,7 @@ import {
   Newspaper,
   PieChart,
   Plus,
+  Package,
   Scan,
   ScatterChart,
   Send,
@@ -154,6 +155,7 @@ export const sidebarConfig: SidebarConfig = {
 
   rail: [
     [{ title: "Home", icon: Home, section: "home" }],
+    [{ title: "Cadastros", icon: Package, section: "cadastros" }],
     [
       { title: "Portfolio", icon: CircleUser, section: "portfolio" },
       { title: "Market", icon: PieChart, section: "market" },
@@ -173,6 +175,16 @@ export const sidebarConfig: SidebarConfig = {
   ],
 
   sections: {
+    cadastros: {
+      title: "Cadastros",
+      description: "Gestão de entidades e produtos",
+      groups: [
+        {
+          items: [{ title: "Produtos", icon: Package }],
+        },
+      ],
+    },
+
     home: {
       title: "Home",
       description: "Your workspace at a glance",

@@ -78,3 +78,36 @@ When working with shadcn components, use the CLI (`npx shadcn@latest docs <compo
   - forms must use `FieldGroup` + `Field` composition.
   - prefer semantic tokens and variants (no raw color overrides).
   - use existing `Card`, `Button`, `Input`, `Alert`, and `Spinner` components for consistency.
+
+## Product UI standards
+
+- Product feature code should live under `src/features/product/` with:
+  - `api/` for typed product client/server calls and request schemas.
+  - `hooks/` for TanStack Query data/mutation hooks (`useProducts`, `useProduct`, etc).
+  - `components/` for product list/table, tab-based form, and tab-based detail UI.
+  - `types/` for product DTOs and lookup option types.
+- Product contracts must come from `docs/api-docs.json`; avoid guessing endpoint names or payload keys.
+- Product form UX must be tab-based and aligned with Bora ERP ERP-style layout:
+  - tabs: Dados gerais, Dados complementares, Ficha técnica, Anúncios, Kits, Preços, Custos, Outros.
+  - only product name is required for initial create.
+  - first create should persist minimal payload and then save additional tab payloads if fields were filled.
+  - independent tab saves for edit flow (save current tab only).
+- Product detail view must reuse the same tab structure in read-only mode (no raw JSON dumps).
+- Required frontend stack for product screens:
+  - TanStack Form for form state.
+  - TanStack Query for API state and mutations.
+  - TanStack Table for product list rendering.
+  - shadcn/ui components for UI composition.
+- Keep active tab in URL query param (`?tab=...`) when practical for form/detail screens.
+
+### Product reference data TODO
+
+- `docs/api-docs.json` currently does not expose dedicated lookup endpoints for:
+  - product types/status
+  - SPED item types
+  - origin codes
+  - units/package types
+  - marketplace channels
+  - price lists
+  - categories/brands
+- Until backend lookup endpoints are available, maintain temporary centralized fallback options in `src/features/product/types/lookups.ts`. Do not duplicate hardcoded options across components.

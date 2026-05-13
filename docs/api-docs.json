@@ -733,6 +733,167 @@
         }
       }
     },
+    "/api/v1/lookups/units-of-measure": {
+      "get": {
+        "tags": [
+          "lookup-controller"
+        ],
+        "operationId": "listUnitsOfMeasure",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UnitOfMeasureLookupResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/lookups/sped-item-types": {
+      "get": {
+        "tags": [
+          "lookup-controller"
+        ],
+        "operationId": "listSpedItemTypes",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LookupResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/lookups/product-types": {
+      "get": {
+        "tags": [
+          "lookup-controller"
+        ],
+        "operationId": "listProductTypes",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LookupResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/lookups/product-statuses": {
+      "get": {
+        "tags": [
+          "lookup-controller"
+        ],
+        "operationId": "listProductStatuses",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LookupResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/lookups/product-origin-codes": {
+      "get": {
+        "tags": [
+          "lookup-controller"
+        ],
+        "operationId": "listProductOriginCodes",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LookupResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/lookups/package-types": {
+      "get": {
+        "tags": [
+          "lookup-controller"
+        ],
+        "operationId": "listPackageTypes",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LookupResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/lookups/marketplace-channels": {
+      "get": {
+        "tags": [
+          "lookup-controller"
+        ],
+        "operationId": "listMarketplaceChannels",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LookupResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/companies/{companyId}/products/{productId}": {
       "get": {
         "tags": [
@@ -1884,6 +2045,42 @@
           }
         }
       },
+      "UnitOfMeasureLookupResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "system": {
+            "type": "boolean"
+          }
+        }
+      },
+      "LookupResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
       "Pageable": {
         "type": "object",
         "properties": {
@@ -1916,12 +2113,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "pageable": {
-            "$ref": "#/components/schemas/PageableObject"
-          },
-          "sort": {
-            "$ref": "#/components/schemas/SortObject"
-          },
           "numberOfElements": {
             "type": "integer",
             "format": "int32"
@@ -1931,6 +2122,12 @@
           },
           "last": {
             "type": "boolean"
+          },
+          "pageable": {
+            "$ref": "#/components/schemas/PageableObject"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/SortObject"
           },
           "size": {
             "type": "integer",

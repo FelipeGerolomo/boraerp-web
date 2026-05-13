@@ -24,7 +24,11 @@ type ApiRequestInit = {
 
 async function parseJsonBody(response: Response) {
   const contentType = response.headers.get("content-type");
-  if (!contentType?.includes("application/json")) {
+  const isJson =
+    contentType?.includes("application/json") ||
+    contentType?.includes("+json");
+
+  if (!isJson) {
     return null;
   }
 
@@ -51,17 +55,26 @@ export async function apiRequest<TResponse>(
   path: string,
   init: ApiRequestInit = {},
 ): Promise<TResponse> {
-  const response = await fetch(`${API_BASE_URL}${path}`, {
-    method: init.method ?? "GET",
-    headers: {
-      Accept: "application/json",
-      ...(init.body ? { "Content-Type": "application/json" } : {}),
-      ...(init.token ? { Authorization: `Bearer ${init.token}` } : {}),
-      ...init.headers,
-    },
-    body: init.body ? JSON.stringify(init.body) : undefined,
-    cache: "no-store",
-  });
+  let response: Response;
+
+  try {
+    response = await fetch(`${API_BASE_URL}${path}`, {
+      method: init.method ?? "GET",
+      headers: {
+        Accept: "application/json",
+        ...(init.body ? { "Content-Type": "application/json" } : {}),
+        ...(init.token ? { Authorization: `Bearer ${init.token}` } : {}),
+        ...init.headers,
+      },
+      body: init.body ? JSON.stringify(init.body) : undefined,
+      cache: "no-store",
+    });
+  } catch {
+    throw new ApiClientError(
+      503,
+      "Unable to reach the backend service. Please try again.",
+    );
+  }
 
   const parsed = await parseJsonBody(response);
 

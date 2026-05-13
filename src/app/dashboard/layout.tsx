@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import type { ReactNode } from "react";
 import { AuthSessionProvider } from "@/auth/components/auth-session-provider";
 import { DashboardShell } from "@/components/dashboard-shell";
+import { QueryProvider } from "@/components/providers/query-provider";
 import { getAuthenticatedSession } from "@/lib/session/cookies";
 
 export default async function DashboardLayout({
@@ -16,8 +17,10 @@ export default async function DashboardLayout({
   }
 
   return (
-    <AuthSessionProvider initialSession={session}>
-      <DashboardShell>{children}</DashboardShell>
-    </AuthSessionProvider>
+    <QueryProvider>
+      <AuthSessionProvider initialSession={session}>
+        <DashboardShell>{children}</DashboardShell>
+      </AuthSessionProvider>
+    </QueryProvider>
   );
 }
