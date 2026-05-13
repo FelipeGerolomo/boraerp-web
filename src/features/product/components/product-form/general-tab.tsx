@@ -1,5 +1,16 @@
-import { Input } from "@/components/ui/input"
-import { Switch } from "@/components/ui/switch"
+import {
+  BadgePercent,
+  Barcode,
+  Boxes,
+  CalendarClock,
+  Hash,
+  Landmark,
+  MapPin,
+  PackageMinus,
+  PackagePlus,
+  Tag,
+  Weight,
+} from "lucide-react"
 import {
   Field,
   FieldDescription,
@@ -9,6 +20,7 @@ import {
   FieldSeparator,
   FieldSet,
 } from "@/components/ui/field"
+import { Switch } from "@/components/ui/switch"
 import {
   PackageTypeAutocomplete,
   ProductOriginCodeAutocomplete,
@@ -18,31 +30,8 @@ import {
   UnitOfMeasureAutocomplete,
 } from "@/features/lookup/components"
 import { BoxDimensionsDiagram } from "./box-dimensions-diagram"
+import { NumberInput, TextInput } from "./form-fields"
 import type { ProductFormTabProps } from "./types"
-
-function NumberInput({
-  value,
-  onChange,
-  placeholder,
-}: {
-  value?: number
-  onChange: (value?: number) => void
-  placeholder?: string
-}) {
-  return (
-    <Input
-      type="number"
-      step="0.01"
-      min="0"
-      value={value ?? ""}
-      placeholder={placeholder}
-      onChange={(event) => {
-        const next = event.target.value
-        onChange(next === "" ? undefined : Number(next))
-      }}
-    />
-  )
-}
 
 export function ProductGeneralTab({ values, setValue }: ProductFormTabProps) {
   return (
@@ -60,6 +49,7 @@ export function ProductGeneralTab({ values, setValue }: ProductFormTabProps) {
               <ProductTypeAutocomplete
                 value={values.productTypeCode}
                 onChange={(value) => setValue("productTypeCode", value ?? "")}
+                placeholder="Selecione o tipo do produto"
               />
             </Field>
 
@@ -68,6 +58,7 @@ export function ProductGeneralTab({ values, setValue }: ProductFormTabProps) {
               <SpedItemTypeAutocomplete
                 value={values.spedItemTypeCode}
                 onChange={(value) => setValue("spedItemTypeCode", value ?? "")}
+                placeholder="Selecione o tipo do item SPED"
               />
             </Field>
 
@@ -76,6 +67,7 @@ export function ProductGeneralTab({ values, setValue }: ProductFormTabProps) {
               <ProductStatusAutocomplete
                 value={values.statusCode}
                 onChange={(value) => setValue("statusCode", value ?? "")}
+                placeholder="Selecione o status"
               />
             </Field>
           </div>
@@ -93,11 +85,12 @@ export function ProductGeneralTab({ values, setValue }: ProductFormTabProps) {
         <FieldGroup className="gap-4">
           <Field>
             <FieldLabel htmlFor="name">Nome do produto *</FieldLabel>
-            <Input
+            <TextInput
               id="name"
               value={values.name}
-              onChange={(event) => setValue("name", event.target.value)}
+              onChange={(value) => setValue("name", value)}
               placeholder="Digite o nome do produto"
+              startAddon={<Tag />}
               required
             />
           </Field>
@@ -105,25 +98,32 @@ export function ProductGeneralTab({ values, setValue }: ProductFormTabProps) {
           <div className="grid gap-4 md:grid-cols-3">
             <Field>
               <FieldLabel>SKU</FieldLabel>
-              <Input
+              <TextInput
                 value={values.sku}
-                onChange={(event) => setValue("sku", event.target.value)}
+                onChange={(value) => setValue("sku", value)}
+                placeholder="Ex.: PRD-0001"
+                startAddon={<Hash />}
               />
             </Field>
 
             <Field>
               <FieldLabel>Código de barras / GTIN</FieldLabel>
-              <Input
+              <TextInput
                 value={values.barcode}
-                onChange={(event) => setValue("barcode", event.target.value)}
+                onChange={(value) => setValue("barcode", value)}
+                placeholder="Ex.: 7891234567890"
+                startAddon={<Barcode />}
+                inputMode="numeric"
               />
             </Field>
 
             <Field>
               <FieldLabel>NCM</FieldLabel>
-              <Input
+              <TextInput
                 value={values.ncm}
-                onChange={(event) => setValue("ncm", event.target.value)}
+                onChange={(value) => setValue("ncm", value)}
+                placeholder="Ex.: 6109.10.00"
+                startAddon={<Landmark />}
               />
             </Field>
           </div>
@@ -131,9 +131,11 @@ export function ProductGeneralTab({ values, setValue }: ProductFormTabProps) {
           <div className="grid gap-4 md:grid-cols-2">
             <Field>
               <FieldLabel>CEST</FieldLabel>
-              <Input
+              <TextInput
                 value={values.cest}
-                onChange={(event) => setValue("cest", event.target.value)}
+                onChange={(value) => setValue("cest", value)}
+                placeholder="Ex.: 28.038.00"
+                startAddon={<Landmark />}
               />
             </Field>
 
@@ -142,6 +144,7 @@ export function ProductGeneralTab({ values, setValue }: ProductFormTabProps) {
               <ProductOriginCodeAutocomplete
                 value={values.originCode}
                 onChange={(value) => setValue("originCode", value ?? "")}
+                placeholder="Selecione a origem"
               />
             </Field>
           </div>
@@ -152,6 +155,7 @@ export function ProductGeneralTab({ values, setValue }: ProductFormTabProps) {
               <UnitOfMeasureAutocomplete
                 value={values.unitOfMeasureId}
                 onChange={(value) => setValue("unitOfMeasureId", value ?? "")}
+                placeholder="Selecione a unidade"
               />
             </Field>
 
@@ -160,6 +164,7 @@ export function ProductGeneralTab({ values, setValue }: ProductFormTabProps) {
               <UnitOfMeasureAutocomplete
                 value={values.commercialUnitId}
                 onChange={(value) => setValue("commercialUnitId", value ?? "")}
+                placeholder="Selecione a unidade comercial"
               />
             </Field>
 
@@ -168,6 +173,7 @@ export function ProductGeneralTab({ values, setValue }: ProductFormTabProps) {
               <UnitOfMeasureAutocomplete
                 value={values.taxableUnitId}
                 onChange={(value) => setValue("taxableUnitId", value ?? "")}
+                placeholder="Selecione a unidade tributável"
               />
             </Field>
           </div>
@@ -178,6 +184,8 @@ export function ProductGeneralTab({ values, setValue }: ProductFormTabProps) {
               <NumberInput
                 value={values.price}
                 onChange={(value) => setValue("price", value)}
+                placeholder="0,00"
+                startAddon="R$"
               />
             </Field>
             <Field>
@@ -185,6 +193,9 @@ export function ProductGeneralTab({ values, setValue }: ProductFormTabProps) {
               <NumberInput
                 value={values.promotionalPrice}
                 onChange={(value) => setValue("promotionalPrice", value)}
+                placeholder="0,00"
+                startAddon="R$"
+                endAddon={<BadgePercent />}
               />
             </Field>
           </div>
@@ -204,41 +215,53 @@ export function ProductGeneralTab({ values, setValue }: ProductFormTabProps) {
             <div className="flex flex-col gap-4">
               <div className="grid gap-4 sm:grid-cols-3">
                 <Field>
-                  <FieldLabel>Largura (cm)</FieldLabel>
+                  <FieldLabel>Largura (L)</FieldLabel>
                   <NumberInput
                     value={values.widthCm}
                     onChange={(value) => setValue("widthCm", value)}
+                    placeholder="0,00"
+                    endAddon="cm"
                   />
                 </Field>
                 <Field>
-                  <FieldLabel>Altura (cm)</FieldLabel>
+                  <FieldLabel>Altura (A)</FieldLabel>
                   <NumberInput
                     value={values.heightCm}
                     onChange={(value) => setValue("heightCm", value)}
+                    placeholder="0,00"
+                    endAddon="cm"
                   />
                 </Field>
                 <Field>
-                  <FieldLabel>Comprimento (cm)</FieldLabel>
+                  <FieldLabel>Comprimento (C)</FieldLabel>
                   <NumberInput
                     value={values.lengthCm}
                     onChange={(value) => setValue("lengthCm", value)}
+                    placeholder="0,00"
+                    endAddon="cm"
                   />
                 </Field>
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2">
                 <Field>
-                  <FieldLabel>Peso líquido (kg)</FieldLabel>
+                  <FieldLabel>Peso líquido</FieldLabel>
                   <NumberInput
                     value={values.netWeightKg}
                     onChange={(value) => setValue("netWeightKg", value)}
+                    placeholder="0,00"
+                    startAddon={<Weight />}
+                    endAddon="kg"
                   />
                 </Field>
                 <Field>
-                  <FieldLabel>Peso bruto (kg)</FieldLabel>
+                  <FieldLabel>Peso bruto</FieldLabel>
                   <NumberInput
                     value={values.grossWeightKg}
                     onChange={(value) => setValue("grossWeightKg", value)}
+                    placeholder="0,00"
+                    startAddon={<Weight />}
+                    endAddon="kg"
                   />
                 </Field>
               </div>
@@ -248,6 +271,7 @@ export function ProductGeneralTab({ values, setValue }: ProductFormTabProps) {
                 <PackageTypeAutocomplete
                   value={values.packageTypeCode}
                   onChange={(value) => setValue("packageTypeCode", value ?? "")}
+                  placeholder="Selecione o tipo de embalagem"
                 />
               </Field>
             </div>
@@ -274,6 +298,9 @@ export function ProductGeneralTab({ values, setValue }: ProductFormTabProps) {
               <NumberInput
                 value={values.initialStock}
                 onChange={(value) => setValue("initialStock", value)}
+                placeholder="0"
+                step="1"
+                startAddon={<Boxes />}
               />
             </Field>
             <Field>
@@ -281,6 +308,9 @@ export function ProductGeneralTab({ values, setValue }: ProductFormTabProps) {
               <NumberInput
                 value={values.minimumStock}
                 onChange={(value) => setValue("minimumStock", value)}
+                placeholder="0"
+                step="1"
+                startAddon={<PackageMinus />}
               />
             </Field>
             <Field>
@@ -288,6 +318,9 @@ export function ProductGeneralTab({ values, setValue }: ProductFormTabProps) {
               <NumberInput
                 value={values.maximumStock}
                 onChange={(value) => setValue("maximumStock", value)}
+                placeholder="0"
+                step="1"
+                startAddon={<PackagePlus />}
               />
             </Field>
           </div>
@@ -295,33 +328,28 @@ export function ProductGeneralTab({ values, setValue }: ProductFormTabProps) {
           <div className="grid gap-4 md:grid-cols-2">
             <Field>
               <FieldLabel>Dias para preparação</FieldLabel>
-              <Input
-                type="number"
-                min="0"
-                value={values.preparationDays ?? ""}
-                onChange={(event) =>
-                  setValue(
-                    "preparationDays",
-                    event.target.value === ""
-                      ? undefined
-                      : Number(event.target.value),
-                  )
-                }
+              <NumberInput
+                value={values.preparationDays}
+                onChange={(value) => setValue("preparationDays", value)}
+                placeholder="0"
+                step="1"
+                startAddon={<CalendarClock />}
+                endAddon="dias"
               />
             </Field>
             <Field>
               <FieldLabel>Localização</FieldLabel>
-              <Input
+              <TextInput
                 value={values.storageLocation}
-                onChange={(event) =>
-                  setValue("storageLocation", event.target.value)
-                }
+                onChange={(value) => setValue("storageLocation", value)}
+                placeholder="Ex.: Corredor A, Prateleira 3"
+                startAddon={<MapPin />}
               />
             </Field>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-3">
-            <Field orientation="horizontal">
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-x-8">
+            <Field orientation="horizontal" className="w-fit">
               <FieldLabel htmlFor="trackInventory">
                 Controlar estoque
               </FieldLabel>
@@ -334,7 +362,7 @@ export function ProductGeneralTab({ values, setValue }: ProductFormTabProps) {
               />
             </Field>
 
-            <Field orientation="horizontal">
+            <Field orientation="horizontal" className="w-fit">
               <FieldLabel htmlFor="allowBackorder">
                 Permitir venda sem estoque
               </FieldLabel>
@@ -347,7 +375,7 @@ export function ProductGeneralTab({ values, setValue }: ProductFormTabProps) {
               />
             </Field>
 
-            <Field orientation="horizontal">
+            <Field orientation="horizontal" className="w-fit">
               <FieldLabel htmlFor="batchControlEnabled">
                 Controlar lotes
               </FieldLabel>

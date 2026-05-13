@@ -1,14 +1,21 @@
-import { Plus, Trash2 } from "lucide-react"
+import { Package, Plus, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import {
   Empty,
   EmptyDescription,
   EmptyHeader,
   EmptyTitle,
 } from "@/components/ui/empty"
-import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
+import {
+  Field,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel,
+  FieldLegend,
+  FieldSet,
+} from "@/components/ui/field"
 import type { ProductKitItem } from "@/features/product/types"
+import { NumberInput, TextInput } from "./form-fields"
 import type { ProductFormTabProps } from "./types"
 
 export function ProductKitsTab({ values, setValue }: ProductFormTabProps) {
@@ -48,68 +55,79 @@ export function ProductKitsTab({ values, setValue }: ProductFormTabProps) {
   }
 
   return (
-    <FieldGroup className="gap-4">
-      <div className="flex items-center justify-between">
-        <h3 className="text-sm font-medium">Itens do kit</h3>
+    <FieldSet>
+      <div className="flex items-start justify-between gap-3">
+        <div className="space-y-1">
+          <FieldLegend className="mb-0">Itens do kit</FieldLegend>
+          <FieldDescription>
+            Produtos que compõem este kit e a quantidade de cada um.
+          </FieldDescription>
+        </div>
         <Button type="button" size="sm" variant="outline" onClick={addItem}>
           <Plus data-icon="inline-start" />
           Adicionar item
         </Button>
       </div>
 
-      {items.length === 0 && (
-        <p className="rounded-xl border border-dashed px-4 py-6 text-sm text-muted-foreground">
-          Nenhum item adicionado ao kit.
-        </p>
-      )}
+      <FieldGroup className="gap-4">
+        {items.length === 0 ? (
+          <Empty className="border border-dashed">
+            <EmptyHeader>
+              <EmptyTitle>Nenhum item adicionado ao kit</EmptyTitle>
+              <EmptyDescription>
+                Use “Adicionar item” para compor o kit com outros produtos.
+              </EmptyDescription>
+            </EmptyHeader>
+          </Empty>
+        ) : null}
 
-      {items.map((item, index) => (
-        <div key={`${index}-${item.childProductId}`} className="rounded-xl border p-4">
-          <div className="grid gap-4 md:grid-cols-[1fr_200px_auto]">
-            <Field>
-              <FieldLabel>ID do produto filho</FieldLabel>
-              <Input
-                value={item.childProductId}
-                onChange={(event) =>
-                  updateItem(index, {
-                    ...item,
-                    childProductId: event.target.value,
-                  })
-                }
-                placeholder="UUID do produto filho"
-              />
-            </Field>
+        {items.map((item, index) => (
+          <div
+            key={`${index}-${item.childProductId}`}
+            className="rounded-2xl border p-4"
+          >
+            <div className="grid gap-4 md:grid-cols-[1fr_200px_auto]">
+              <Field>
+                <FieldLabel>Produto filho</FieldLabel>
+                <TextInput
+                  value={item.childProductId}
+                  onChange={(value) =>
+                    updateItem(index, { ...item, childProductId: value })
+                  }
+                  placeholder="UUID do produto filho"
+                  startAddon={<Package />}
+                />
+              </Field>
 
-            <Field>
-              <FieldLabel>Quantidade</FieldLabel>
-              <Input
-                type="number"
-                min="0.0001"
-                step="0.0001"
-                value={item.quantity}
-                onChange={(event) =>
-                  updateItem(index, {
-                    ...item,
-                    quantity: Number(event.target.value || 0),
-                  })
-                }
-              />
-            </Field>
+              <Field>
+                <FieldLabel>Quantidade</FieldLabel>
+                <NumberInput
+                  value={item.quantity}
+                  onChange={(value) =>
+                    updateItem(index, { ...item, quantity: value ?? 0 })
+                  }
+                  placeholder="1"
+                  min="0.0001"
+                  step="0.0001"
+                  endAddon="un"
+                />
+              </Field>
 
-            <Field>
-              <FieldLabel>&nbsp;</FieldLabel>
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => removeItem(index)}
-              >
-                <Trash2 data-icon="inline-start" />
-                Remover
-              </Button>
-            </Field>
+              <Field>
+                <FieldLabel>&nbsp;</FieldLabel>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => removeItem(index)}
+                >
+                  <Trash2 data-icon="inline-start" />
+                  Remover
+                </Button>
+              </Field>
+            </div>
           </div>
-        </div>
-      ))}
-    </FieldGroup>
+        ))}
+      </FieldGroup>
+    </FieldSet>
   )
 }

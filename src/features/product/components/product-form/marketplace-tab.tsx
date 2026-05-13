@@ -1,13 +1,29 @@
-import { Plus, Trash2 } from "lucide-react"
+import { Hash, Link2, Plus, Tag, Trash2, Type } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyTitle,
+} from "@/components/ui/empty"
+import {
+  Field,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel,
+  FieldLegend,
+  FieldSet,
+} from "@/components/ui/field"
 import { Switch } from "@/components/ui/switch"
-import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { MarketplaceChannelAutocomplete } from "@/features/lookup/components"
 import type { ProductMarketplaceListing } from "@/features/product/types"
+import { TextInput } from "./form-fields"
 import type { ProductFormTabProps } from "./types"
 
-export function ProductMarketplaceTab({ values, setValue }: ProductFormTabProps) {
+export function ProductMarketplaceTab({
+  values,
+  setValue,
+}: ProductFormTabProps) {
   const listings = values.marketplaceListings
 
   function updateItem(index: number, next: ProductMarketplaceListing) {
@@ -20,12 +36,7 @@ export function ProductMarketplaceTab({ values, setValue }: ProductFormTabProps)
   }
 
   function addListing() {
-    setValue("marketplaceListings", [
-      ...listings,
-      {
-        active: true,
-      },
-    ])
+    setValue("marketplaceListings", [...listings, { active: true }])
   }
 
   function removeListing(index: number) {
@@ -36,119 +47,130 @@ export function ProductMarketplaceTab({ values, setValue }: ProductFormTabProps)
   }
 
   return (
-    <FieldGroup className="gap-4">
-      <div className="flex items-center justify-between">
-        <h3 className="text-sm font-medium">Anúncios em marketplaces</h3>
+    <FieldSet>
+      <div className="flex items-start justify-between gap-3">
+        <div className="space-y-1">
+          <FieldLegend className="mb-0">Anúncios em marketplaces</FieldLegend>
+          <FieldDescription>
+            Vínculos do produto com anúncios em canais externos (Mercado Livre,
+            Shopee, etc.).
+          </FieldDescription>
+        </div>
         <Button type="button" size="sm" variant="outline" onClick={addListing}>
           <Plus data-icon="inline-start" />
           Adicionar anúncio
         </Button>
       </div>
 
-      {listings.length === 0 && (
-        <p className="rounded-xl border border-dashed px-4 py-6 text-sm text-muted-foreground">
-          Nenhum anúncio cadastrado.
-        </p>
-      )}
+      <FieldGroup className="gap-4">
+        {listings.length === 0 ? (
+          <Empty className="border border-dashed">
+            <EmptyHeader>
+              <EmptyTitle>Nenhum anúncio cadastrado</EmptyTitle>
+              <EmptyDescription>
+                Vincule este produto a um canal de venda usando “Adicionar
+                anúncio”.
+              </EmptyDescription>
+            </EmptyHeader>
+          </Empty>
+        ) : null}
 
-      {listings.map((listing, index) => (
-        <div
-          key={`${index}-${listing.id ?? listing.marketplaceChannelId ?? "novo"}`}
-          className="rounded-xl border p-4"
-        >
-          <div className="grid gap-4 md:grid-cols-2">
-            <Field>
-              <FieldLabel>Canal</FieldLabel>
-              <MarketplaceChannelAutocomplete
-                value={listing.marketplaceChannelId}
-                onChange={(value) =>
-                  updateItem(index, {
-                    ...listing,
-                    marketplaceChannelId: value,
-                  })
-                }
-                placeholder="Selecione o canal"
-              />
-            </Field>
+        {listings.map((listing, index) => (
+          <div
+            key={`${index}-${listing.id ?? listing.marketplaceChannelId ?? "novo"}`}
+            className="rounded-2xl border p-4"
+          >
+            <div className="grid gap-4 md:grid-cols-2">
+              <Field>
+                <FieldLabel>Canal</FieldLabel>
+                <MarketplaceChannelAutocomplete
+                  value={listing.marketplaceChannelId}
+                  onChange={(value) =>
+                    updateItem(index, {
+                      ...listing,
+                      marketplaceChannelId: value,
+                    })
+                  }
+                  placeholder="Selecione o canal"
+                />
+              </Field>
 
-            <Field orientation="horizontal">
-              <FieldLabel>Ativo</FieldLabel>
-              <Switch
-                checked={listing.active ?? false}
-                onCheckedChange={(checked) =>
-                  updateItem(index, {
-                    ...listing,
-                    active: checked,
-                  })
-                }
-              />
-            </Field>
+              <Field orientation="horizontal">
+                <FieldLabel>Ativo</FieldLabel>
+                <Switch
+                  checked={listing.active ?? false}
+                  onCheckedChange={(checked) =>
+                    updateItem(index, { ...listing, active: checked })
+                  }
+                />
+              </Field>
 
-            <Field>
-              <FieldLabel>ID anúncio externo</FieldLabel>
-              <Input
-                value={listing.externalListingId ?? ""}
-                onChange={(event) =>
-                  updateItem(index, {
-                    ...listing,
-                    externalListingId: event.target.value,
-                  })
-                }
-              />
-            </Field>
+              <Field>
+                <FieldLabel>ID anúncio externo</FieldLabel>
+                <TextInput
+                  value={listing.externalListingId ?? ""}
+                  onChange={(value) =>
+                    updateItem(index, {
+                      ...listing,
+                      externalListingId: value,
+                    })
+                  }
+                  placeholder="Ex.: MLB1234567890"
+                  startAddon={<Hash />}
+                />
+              </Field>
 
-            <Field>
-              <FieldLabel>SKU externo</FieldLabel>
-              <Input
-                value={listing.externalSku ?? ""}
-                onChange={(event) =>
-                  updateItem(index, {
-                    ...listing,
-                    externalSku: event.target.value,
-                  })
-                }
-              />
-            </Field>
+              <Field>
+                <FieldLabel>SKU externo</FieldLabel>
+                <TextInput
+                  value={listing.externalSku ?? ""}
+                  onChange={(value) =>
+                    updateItem(index, { ...listing, externalSku: value })
+                  }
+                  placeholder="SKU usado no canal"
+                  startAddon={<Tag />}
+                />
+              </Field>
 
-            <Field>
-              <FieldLabel>Título</FieldLabel>
-              <Input
-                value={listing.title ?? ""}
-                onChange={(event) =>
-                  updateItem(index, {
-                    ...listing,
-                    title: event.target.value,
-                  })
-                }
-              />
-            </Field>
+              <Field>
+                <FieldLabel>Título</FieldLabel>
+                <TextInput
+                  value={listing.title ?? ""}
+                  onChange={(value) =>
+                    updateItem(index, { ...listing, title: value })
+                  }
+                  placeholder="Título do anúncio"
+                  startAddon={<Type />}
+                />
+              </Field>
 
-            <Field>
-              <FieldLabel>URL do anúncio</FieldLabel>
-              <Input
-                value={listing.listingUrl ?? ""}
-                onChange={(event) =>
-                  updateItem(index, {
-                    ...listing,
-                    listingUrl: event.target.value,
-                  })
-                }
-              />
-            </Field>
+              <Field>
+                <FieldLabel>URL do anúncio</FieldLabel>
+                <TextInput
+                  type="url"
+                  value={listing.listingUrl ?? ""}
+                  onChange={(value) =>
+                    updateItem(index, { ...listing, listingUrl: value })
+                  }
+                  placeholder="https://"
+                  startAddon={<Link2 />}
+                />
+              </Field>
+            </div>
+
+            <div className="mt-3 flex justify-end">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => removeListing(index)}
+              >
+                <Trash2 data-icon="inline-start" />
+                Remover
+              </Button>
+            </div>
           </div>
-
-          <div className="mt-3 flex justify-end">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => removeListing(index)}
-            >
-              <Trash2 data-icon="inline-start" />
-              Remover
-            </Button>
-          </div>
-        </div>
-      ))}
-    </FieldGroup>
+        ))}
+      </FieldGroup>
+    </FieldSet>
   )
 }
