@@ -16,6 +16,6 @@ export async function GET() {
     const response = await listSpedItemTypesLookup(context.token)
     return NextResponse.json(response)
   } catch (error) {
-    return handleLookupRouteError(error, "Unable to list SPED item types")
+    return handleLookupRouteError(error, "Não foi possível listar os tipos SPED")
   }
 }

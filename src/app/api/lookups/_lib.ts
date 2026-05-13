@@ -15,7 +15,7 @@ export async function getLookupApiContext() {
 
 export function unauthorizedResponse() {
   return NextResponse.json(
-    { message: "Your session expired. Please login again." },
+    { message: "Sua sessão expirou. Faça login novamente." },
     { status: 401 },
   )
 }

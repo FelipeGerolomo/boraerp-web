@@ -24,7 +24,7 @@ export async function getProductApiContext() {
 
 export function unauthorizedResponse() {
   return NextResponse.json(
-    { message: "Your session expired. Please login again." },
+    { message: "Sua sessão expirou. Faça login novamente." },
     { status: 401 },
   )
 }
@@ -43,7 +43,7 @@ export function handleProductRouteError(error: unknown, fallback: string) {
   if (error instanceof ZodError) {
     return NextResponse.json(
       {
-        message: "Invalid request payload",
+        message: "Dados da requisição inválidos",
         errors: error.flatten(),
       },
       { status: 400 },

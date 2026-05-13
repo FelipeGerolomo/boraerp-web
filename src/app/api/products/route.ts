@@ -32,7 +32,7 @@ export async function GET(request: Request) {
     const response = await listProducts(context.companyId, context.token, query)
     return NextResponse.json(response)
   } catch (error) {
-    return handleProductRouteError(error, "Unable to list products")
+    return handleProductRouteError(error, "Não foi possível listar os produtos")
   }
 }
 
@@ -47,6 +47,6 @@ export async function POST(request: Request) {
     const response = await createProduct(context.companyId, context.token, body)
     return NextResponse.json(response)
   } catch (error) {
-    return handleProductRouteError(error, "Unable to create product")
+    return handleProductRouteError(error, "Não foi possível criar o produto")
   }
 }

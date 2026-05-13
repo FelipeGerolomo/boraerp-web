@@ -89,7 +89,7 @@ export function LoginForm() {
       setFormError(
         isAuthApiError(error)
           ? error.message
-          : "Unable to login right now. Please try again.",
+          : "Não foi possível entrar agora. Tente novamente.",
       );
 
       if (isUnauthorized) {
@@ -106,13 +106,13 @@ export function LoginForm() {
         {formError && (
           <Alert variant="destructive">
             <AlertCircle />
-            <AlertTitle>Login failed</AlertTitle>
+            <AlertTitle>Falha ao entrar</AlertTitle>
             <AlertDescription>{formError}</AlertDescription>
           </Alert>
         )}
 
         <Field data-invalid={Boolean(fieldErrors.email)}>
-          <FieldLabel htmlFor="email">Email</FieldLabel>
+          <FieldLabel htmlFor="email">E-mail</FieldLabel>
           <Input
             id="email"
             type="email"
@@ -125,7 +125,7 @@ export function LoginForm() {
                 email: event.target.value,
               }))
             }
-            placeholder="name@company.com"
+            placeholder="nome@empresa.com"
             required
           />
           <FieldError>{fieldErrors.email}</FieldError>
@@ -133,7 +133,7 @@ export function LoginForm() {
 
         <Field data-invalid={Boolean(fieldErrors.password)}>
           <div className="flex items-center justify-between">
-            <FieldLabel htmlFor="password">Password</FieldLabel>
+            <FieldLabel htmlFor="password">Senha</FieldLabel>
           </div>
           <Input
             id="password"
@@ -150,7 +150,7 @@ export function LoginForm() {
             required
           />
           <FieldDescription>
-            Use the password created when you registered your account.
+            Use a senha criada quando você cadastrou sua conta.
           </FieldDescription>
           <FieldError>{fieldErrors.password}</FieldError>
         </Field>
@@ -158,10 +158,10 @@ export function LoginForm() {
         <Field>
           <Button type="submit" disabled={!canSubmit || isSubmitting}>
             {isSubmitting && <Spinner data-icon="inline-start" />}
-            Login
+            Entrar
           </Button>
           <FieldDescription className="text-center">
-            New to Bora ERP? <Link href="/signup">Create your account</Link>
+            Novo no Bora ERP? <Link href="/signup">Crie sua conta</Link>
           </FieldDescription>
         </Field>
       </FieldGroup>

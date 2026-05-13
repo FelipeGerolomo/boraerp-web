@@ -26,6 +26,6 @@ export async function PATCH(
 
     return NextResponse.json(response)
   } catch (error) {
-    return handleProductRouteError(error, "Unable to save other product data")
+    return handleProductRouteError(error, "Não foi possível salvar os outros dados do produto")
   }
 }

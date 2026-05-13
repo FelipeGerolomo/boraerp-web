@@ -14,7 +14,7 @@ export async function POST(request: Request) {
 
     if (!pending) {
       return NextResponse.json(
-        { message: "Company selection session expired. Please login again." },
+        { message: "A sessão de seleção de empresa expirou. Faça login novamente." },
         { status: 401 },
       );
     }
@@ -25,7 +25,7 @@ export async function POST(request: Request) {
 
     if (!selected) {
       return NextResponse.json(
-        { message: "You do not have access to the selected company." },
+        { message: "Você não tem acesso à empresa selecionada." },
         { status: 403 },
       );
     }
@@ -41,6 +41,6 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ session });
   } catch (error) {
-    return handleRouteError(error, "Unable to select company");
+    return handleRouteError(error, "Não foi possível selecionar a empresa");
   }
 }

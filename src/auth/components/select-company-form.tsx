@@ -50,7 +50,7 @@ export function SelectCompanyForm({
       setError(
         isAuthApiError(requestError)
           ? requestError.message
-          : "Unable to select company. Please try again.",
+          : "Não foi possível selecionar a empresa. Tente novamente.",
       );
     } finally {
       setIsSubmitting(false);
@@ -60,17 +60,17 @@ export function SelectCompanyForm({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Select your company</CardTitle>
+        <CardTitle>Selecione sua empresa</CardTitle>
         <CardDescription>
-          Your account belongs to multiple companies. Choose the workspace you
-          want to enter.
+          Sua conta pertence a várias empresas. Escolha o ambiente que deseja
+          acessar.
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         {error && (
           <Alert variant="destructive">
             <AlertCircle />
-            <AlertTitle>Could not continue</AlertTitle>
+            <AlertTitle>Não foi possível continuar</AlertTitle>
             <AlertDescription>{error}</AlertDescription>
           </Alert>
         )}
@@ -97,7 +97,7 @@ export function SelectCompanyForm({
                     {company.name}
                   </span>
                   <span className="text-xs text-muted-foreground">
-                    Company workspace
+                    Ambiente da empresa
                   </span>
                 </span>
               </button>
@@ -111,7 +111,7 @@ export function SelectCompanyForm({
           disabled={!canSubmit || isSubmitting}
         >
           {isSubmitting && <Spinner data-icon="inline-start" />}
-          Continue
+          Continuar
         </Button>
       </CardContent>
     </Card>

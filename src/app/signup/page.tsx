@@ -16,8 +16,8 @@ export default async function SignupPage() {
 
   return (
     <AuthPageShell
-      title="Create your Bora ERP account"
-      description="Register your company and start managing finance operations today."
+      title="Crie sua conta Bora ERP"
+      description="Cadastre sua empresa e comece a gerenciar suas operações financeiras hoje."
     >
       <SignupForm />
     </AuthPageShell>

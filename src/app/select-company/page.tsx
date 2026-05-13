@@ -16,8 +16,8 @@ export default async function SelectCompanyPage() {
 
   return (
     <AuthPageShell
-      title="Choose your company"
-      description="Select the company you want to access in this session."
+      title="Escolha sua empresa"
+      description="Selecione a empresa que deseja acessar nesta sessão."
     >
       <SelectCompanyForm companies={session.pending.companies} />
     </AuthPageShell>

@@ -16,6 +16,6 @@ export async function GET() {
     const response = await listMarketplaceChannelsLookup(context.token)
     return NextResponse.json(response)
   } catch (error) {
-    return handleLookupRouteError(error, "Unable to list marketplace channels")
+    return handleLookupRouteError(error, "Não foi possível listar os canais de marketplace")
   }
 }

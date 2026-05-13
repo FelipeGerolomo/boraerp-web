@@ -46,7 +46,7 @@ function toApiError(status: number, payload: unknown) {
     problem?.detail ??
     problem?.title ??
     problem?.message ??
-    "Request could not be completed.";
+    "Não foi possível concluir a solicitação.";
 
   return new ApiClientError(status, message, problem);
 }
@@ -72,7 +72,7 @@ export async function apiRequest<TResponse>(
   } catch {
     throw new ApiClientError(
       503,
-      "Unable to reach the backend service. Please try again.",
+      "Não foi possível conectar ao servidor. Tente novamente.",
     );
   }
 

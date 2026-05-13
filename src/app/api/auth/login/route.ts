@@ -19,7 +19,7 @@ export async function POST(request: Request) {
         !response.companies?.length
       ) {
         return NextResponse.json(
-          { message: "Missing company selection data from login response." },
+          { message: "Dados de seleção de empresa ausentes na resposta de login." },
           { status: 502 },
         );
       }
@@ -43,7 +43,7 @@ export async function POST(request: Request) {
       !response.company
     ) {
       return NextResponse.json(
-        { message: "Missing authenticated session data from login response." },
+        { message: "Dados de sessão autenticada ausentes na resposta de login." },
         { status: 502 },
       );
     }
@@ -63,6 +63,6 @@ export async function POST(request: Request) {
       session,
     });
   } catch (error) {
-    return handleRouteError(error, "Unable to login");
+    return handleRouteError(error, "Não foi possível entrar");
   }
 }

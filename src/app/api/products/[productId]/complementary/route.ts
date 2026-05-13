@@ -26,6 +26,6 @@ export async function PATCH(
 
     return NextResponse.json(response)
   } catch (error) {
-    return handleProductRouteError(error, "Unable to save complementary data")
+    return handleProductRouteError(error, "Não foi possível salvar os dados complementares")
   }
 }

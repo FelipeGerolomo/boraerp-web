@@ -18,7 +18,7 @@ export async function POST(request: Request) {
     if (!token || !session) {
       await clearAuthCookies();
       return NextResponse.json(
-        { message: "Your session expired. Please login again." },
+        { message: "Sua sessão expirou. Faça login novamente." },
         { status: 401 },
       );
     }
@@ -31,6 +31,6 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ session: nextSession });
   } catch (error) {
-    return handleRouteError(error, "Unable to switch company");
+    return handleRouteError(error, "Não foi possível trocar de empresa");
   }
 }

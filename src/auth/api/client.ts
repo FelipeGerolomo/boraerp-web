@@ -37,7 +37,7 @@ async function parseError(response: Response): Promise<never> {
     payload?.problem?.detail ??
     payload?.problem?.title ??
     payload?.message ??
-    "Request could not be completed.";
+    "Não foi possível concluir a solicitação.";
 
   throw new AuthApiError(response.status, message);
 }

@@ -16,6 +16,6 @@ export async function GET() {
     const response = await listProductStatusesLookup(context.token)
     return NextResponse.json(response)
   } catch (error) {
-    return handleLookupRouteError(error, "Unable to list product statuses")
+    return handleLookupRouteError(error, "Não foi possível listar os status de produto")
   }
 }

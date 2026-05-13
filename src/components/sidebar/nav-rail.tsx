@@ -144,7 +144,7 @@ export function NavRail({
               variant="destructive"
             >
               <LogOut />
-              {isLoggingOut ? "Logging out..." : "Log out"}
+              {isLoggingOut ? "Saindo..." : "Sair"}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

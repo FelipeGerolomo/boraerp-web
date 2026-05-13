@@ -49,14 +49,14 @@ export function CompanySwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        aria-label={`${active.name}. Switch company`}
+        aria-label={`${active.name}. Trocar de empresa`}
         className="flex w-full items-center gap-2 rounded-xl p-1.5 text-left outline-none transition-colors hover:bg-accent/10 focus-visible:ring-2 focus-visible:ring-ring data-popup-open:bg-accent/10"
       >
         <CompanyBadge name={active.name} />
         <div className="grid min-w-0 flex-1 leading-tight">
           <span className="truncate text-sm font-medium">{active.name}</span>
           <span className="truncate text-xs font-normal text-muted-foreground">
-            Active company
+            Empresa ativa
           </span>
         </div>
         <ChevronsUpDown className="ml-auto shrink-0 text-muted-foreground" />
@@ -68,7 +68,7 @@ export function CompanySwitcher() {
         className="w-64"
       >
         <DropdownMenuGroup>
-          <DropdownMenuLabel>Switch company</DropdownMenuLabel>
+          <DropdownMenuLabel>Trocar de empresa</DropdownMenuLabel>
           {session.companies.map((company) => {
             const isActive = company.id === active.id;
             return (
@@ -87,7 +87,7 @@ export function CompanySwitcher() {
                     {company.name}
                   </span>
                   <span className="truncate text-xs font-normal text-muted-foreground">
-                    {isActive ? "Current" : "Switch to this workspace"}
+                    {isActive ? "Atual" : "Mudar para este ambiente"}
                   </span>
                 </div>
                 {isActive && <Check className="ml-auto shrink-0" />}

@@ -20,6 +20,6 @@ export async function GET(
     const response = await getProduct(context.companyId, context.token, productId)
     return NextResponse.json(response)
   } catch (error) {
-    return handleProductRouteError(error, "Unable to load product")
+    return handleProductRouteError(error, "Não foi possível carregar o produto")
   }
 }

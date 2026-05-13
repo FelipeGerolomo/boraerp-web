@@ -28,7 +28,7 @@ export async function PUT(
   } catch (error) {
     return handleProductRouteError(
       error,
-      "Unable to save marketplace listings",
+      "Não foi possível salvar os anúncios",
     )
   }
 }

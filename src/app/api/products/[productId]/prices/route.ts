@@ -26,6 +26,6 @@ export async function PUT(
 
     return NextResponse.json(response)
   } catch (error) {
-    return handleProductRouteError(error, "Unable to save prices")
+    return handleProductRouteError(error, "Não foi possível salvar os preços")
   }
 }

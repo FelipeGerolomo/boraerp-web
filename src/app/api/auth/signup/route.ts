@@ -19,6 +19,6 @@ export async function POST(request: Request) {
 
     return NextResponse.json(response);
   } catch (error) {
-    return handleRouteError(error, "Unable to create account");
+    return handleRouteError(error, "Não foi possível criar a conta");
   }
 }

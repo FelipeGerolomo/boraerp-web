@@ -16,6 +16,6 @@ export async function GET() {
     const response = await listUnitsOfMeasureLookup(context.token)
     return NextResponse.json(response)
   } catch (error) {
-    return handleLookupRouteError(error, "Unable to list units of measure")
+    return handleLookupRouteError(error, "Não foi possível listar as unidades de medida")
   }
 }

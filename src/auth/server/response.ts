@@ -4,7 +4,7 @@ import { isApiClientError } from "@/lib/api/http";
 
 export function handleRouteError(
   error: unknown,
-  fallback = "Unexpected error",
+  fallback = "Erro inesperado",
 ) {
   if (isApiClientError(error)) {
     return NextResponse.json(
@@ -19,7 +19,7 @@ export function handleRouteError(
   if (error instanceof ZodError) {
     return NextResponse.json(
       {
-        message: "Invalid request payload",
+        message: "Dados da requisição inválidos",
         errors: error.flatten(),
       },
       { status: 400 },

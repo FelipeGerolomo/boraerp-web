@@ -18,12 +18,12 @@ function TrialCard() {
   return (
     <div className="border-t p-3">
       <div className="rounded-xl bg-muted/40 p-3">
-        <p className="text-xs font-medium">Free plan</p>
+        <p className="text-xs font-medium">Plano gratuito</p>
         <p className="mt-0.5 text-[11px] text-muted-foreground">
-          7 days left in trial
+          Faltam 7 dias de teste
         </p>
         <Button size="sm" className="mt-2.5 h-7 w-full text-xs">
-          Upgrade plan
+          Fazer upgrade do plano
         </Button>
       </div>
     </div>

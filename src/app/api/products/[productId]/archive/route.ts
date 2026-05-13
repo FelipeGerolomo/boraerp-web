@@ -23,6 +23,6 @@ export async function POST(
 
     return NextResponse.json(response)
   } catch (error) {
-    return handleProductRouteError(error, "Unable to archive product")
+    return handleProductRouteError(error, "Não foi possível arquivar o produto")
   }
 }

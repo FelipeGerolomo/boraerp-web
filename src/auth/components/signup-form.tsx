@@ -125,14 +125,14 @@ export function SignupForm() {
         password: parsed.data.password,
       });
 
-      setSuccessMessage(response.message || "Account created successfully.");
+      setSuccessMessage(response.message || "Conta criada com sucesso.");
       router.replace("/login");
       router.refresh();
     } catch (error) {
       setFormError(
         isAuthApiError(error)
           ? error.message
-          : "Unable to create account right now. Please try again.",
+          : "Não foi possível criar a conta agora. Tente novamente.",
       );
     } finally {
       setIsSubmitting(false);
@@ -145,7 +145,7 @@ export function SignupForm() {
         {formError && (
           <Alert variant="destructive">
             <AlertCircle />
-            <AlertTitle>Signup failed</AlertTitle>
+            <AlertTitle>Falha no cadastro</AlertTitle>
             <AlertDescription>{formError}</AlertDescription>
           </Alert>
         )}
@@ -153,13 +153,13 @@ export function SignupForm() {
         {successMessage && (
           <Alert>
             <CheckCircle2 />
-            <AlertTitle>Account created</AlertTitle>
+            <AlertTitle>Conta criada</AlertTitle>
             <AlertDescription>{successMessage}</AlertDescription>
           </Alert>
         )}
 
         <Field data-invalid={Boolean(fieldErrors.firstName)}>
-          <FieldLabel htmlFor="firstName">First name</FieldLabel>
+          <FieldLabel htmlFor="firstName">Nome</FieldLabel>
           <Input
             id="firstName"
             value={values.firstName}
@@ -177,7 +177,7 @@ export function SignupForm() {
         </Field>
 
         <Field data-invalid={Boolean(fieldErrors.lastName)}>
-          <FieldLabel htmlFor="lastName">Last name</FieldLabel>
+          <FieldLabel htmlFor="lastName">Sobrenome</FieldLabel>
           <Input
             id="lastName"
             value={values.lastName}
@@ -195,7 +195,7 @@ export function SignupForm() {
         </Field>
 
         <Field data-invalid={Boolean(fieldErrors.phone)}>
-          <FieldLabel htmlFor="phone">Phone</FieldLabel>
+          <FieldLabel htmlFor="phone">Telefone</FieldLabel>
           <Input
             id="phone"
             value={values.phone}
@@ -212,7 +212,7 @@ export function SignupForm() {
         </Field>
 
         <Field data-invalid={Boolean(fieldErrors.companyName)}>
-          <FieldLabel htmlFor="companyName">Company name</FieldLabel>
+          <FieldLabel htmlFor="companyName">Nome da empresa</FieldLabel>
           <Input
             id="companyName"
             value={values.companyName}
@@ -245,13 +245,13 @@ export function SignupForm() {
             required
           />
           <FieldDescription>
-            Enter the 14-digit CNPJ for your company.
+            Informe o CNPJ de 14 dígitos da sua empresa.
           </FieldDescription>
           <FieldError>{fieldErrors.cnpj}</FieldError>
         </Field>
 
         <Field data-invalid={Boolean(fieldErrors.email)}>
-          <FieldLabel htmlFor="email">Email</FieldLabel>
+          <FieldLabel htmlFor="email">E-mail</FieldLabel>
           <Input
             id="email"
             type="email"
@@ -264,14 +264,14 @@ export function SignupForm() {
             }
             aria-invalid={Boolean(fieldErrors.email)}
             autoComplete="email"
-            placeholder="name@company.com"
+            placeholder="nome@empresa.com"
             required
           />
           <FieldError>{fieldErrors.email}</FieldError>
         </Field>
 
         <Field data-invalid={Boolean(fieldErrors.password)}>
-          <FieldLabel htmlFor="password">Password</FieldLabel>
+          <FieldLabel htmlFor="password">Senha</FieldLabel>
           <Input
             id="password"
             type="password"
@@ -286,12 +286,12 @@ export function SignupForm() {
             autoComplete="new-password"
             required
           />
-          <FieldDescription>Minimum 8 characters.</FieldDescription>
+          <FieldDescription>Mínimo de 8 caracteres.</FieldDescription>
           <FieldError>{fieldErrors.password}</FieldError>
         </Field>
 
         <Field data-invalid={Boolean(fieldErrors.confirmPassword)}>
-          <FieldLabel htmlFor="confirmPassword">Confirm password</FieldLabel>
+          <FieldLabel htmlFor="confirmPassword">Confirme a senha</FieldLabel>
           <Input
             id="confirmPassword"
             type="password"
@@ -312,10 +312,10 @@ export function SignupForm() {
         <Field>
           <Button type="submit" disabled={!canSubmit || isSubmitting}>
             {isSubmitting && <Spinner data-icon="inline-start" />}
-            Create account
+            Criar conta
           </Button>
           <FieldDescription className="text-center">
-            Already have an account? <Link href="/login">Login</Link>
+            Já tem uma conta? <Link href="/login">Entrar</Link>
           </FieldDescription>
         </Field>
       </FieldGroup>

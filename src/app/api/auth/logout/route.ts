@@ -15,5 +15,5 @@ export async function POST() {
 
   await clearAuthCookies();
 
-  return NextResponse.json({ message: "Logged out" });
+  return NextResponse.json({ message: "Sessão encerrada" });
 }

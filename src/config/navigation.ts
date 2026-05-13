@@ -154,24 +154,24 @@ export const sidebarConfig: SidebarConfig = {
   brand: { icon: Aperture, title: "BoraERP" },
 
   rail: [
-    [{ title: "Home", icon: Home, section: "home" }],
+    [{ title: "Início", icon: Home, section: "home" }],
     [{ title: "Cadastros", icon: Package, section: "cadastros" }],
     [
-      { title: "Portfolio", icon: CircleUser, section: "portfolio" },
-      { title: "Market", icon: PieChart, section: "market" },
-      { title: "Trading", icon: TrendingUp, section: "trading" },
+      { title: "Carteira", icon: CircleUser, section: "portfolio" },
+      { title: "Mercado", icon: PieChart, section: "market" },
+      { title: "Negociação", icon: TrendingUp, section: "trading" },
     ],
     [
-      { title: "Stocks", icon: ScatterChart, section: "stocks" },
+      { title: "Ações", icon: ScatterChart, section: "stocks" },
       { title: "Scanner", icon: Scan, section: "scanner" },
-      { title: "Analytics", icon: BarChart3, section: "analytics" },
+      { title: "Análises", icon: BarChart3, section: "analytics" },
     ],
   ],
 
   railUtilities: [
-    { title: "Settings", icon: Settings, section: "settings" },
-    { title: "Invite", icon: Link2, section: "invite" },
-    { title: "Support", icon: LifeBuoy, section: "support" },
+    { title: "Configurações", icon: Settings, section: "settings" },
+    { title: "Convidar", icon: Link2, section: "invite" },
+    { title: "Suporte", icon: LifeBuoy, section: "support" },
   ],
 
   sections: {
@@ -186,133 +186,133 @@ export const sidebarConfig: SidebarConfig = {
     },
 
     home: {
-      title: "Home",
-      description: "Your workspace at a glance",
+      title: "Início",
+      description: "Seu ambiente de trabalho em um relance",
       groups: [
         {
           items: [
             {
-              title: "Overview",
+              title: "Visão geral",
               icon: Gauge,
               items: [
-                { title: "Summary" },
-                { title: "Performance" },
-                { title: "Recent activity" },
+                { title: "Resumo" },
+                { title: "Desempenho" },
+                { title: "Atividade recente" },
               ],
             },
             {
-              title: "Activity",
+              title: "Atividade",
               icon: Activity,
               items: [
-                { title: "Timeline" },
-                { title: "Mentions" },
-                { title: "Audit log" },
+                { title: "Linha do tempo" },
+                { title: "Menções" },
+                { title: "Registro de auditoria" },
               ],
             },
             {
-              title: "Notifications",
+              title: "Notificações",
               icon: Bell,
               items: [
-                { title: "Unread" },
-                { title: "All" },
-                { title: "Preferences" },
+                { title: "Não lidas" },
+                { title: "Todas" },
+                { title: "Preferências" },
               ],
             },
           ],
         },
         {
-          label: "Shortcuts",
+          label: "Atalhos",
           items: [
             {
-              title: "Watchlist",
+              title: "Lista de acompanhamento",
               icon: Star,
               items: [
-                { title: "Default" },
-                { title: "Tech picks" },
-                { title: "Dividends" },
+                { title: "Padrão" },
+                { title: "Seleção de tecnologia" },
+                { title: "Dividendos" },
               ],
             },
             {
-              title: "Saved views",
+              title: "Visualizações salvas",
               icon: Bookmark,
-              items: [{ title: "My views" }, { title: "Shared with me" }],
+              items: [{ title: "Minhas visualizações" }, { title: "Compartilhadas comigo" }],
             },
           ],
         },
         {
-          label: "Quick links",
+          label: "Links rápidos",
           items: [
-            { title: "Calendar", icon: CalendarDays },
-            { title: "Tasks", icon: ListTodo },
-            { title: "Inbox", icon: Inbox },
+            { title: "Calendário", icon: CalendarDays },
+            { title: "Tarefas", icon: ListTodo },
+            { title: "Caixa de entrada", icon: Inbox },
           ],
         },
       ],
     },
 
     portfolio: {
-      title: "Portfolio",
-      description: "Holdings, performance & accounts",
+      title: "Carteira",
+      description: "Posições, desempenho e contas",
       groups: [
         {
           items: [
             {
-              title: "Holdings",
+              title: "Posições",
               icon: Briefcase,
               items: [
-                { title: "By account" },
-                { title: "By asset class" },
-                { title: "By sector" },
+                { title: "Por conta" },
+                { title: "Por classe de ativo" },
+                { title: "Por setor" },
               ],
             },
             {
-              title: "Performance",
+              title: "Desempenho",
               icon: TrendingUp,
               items: [
-                { title: "Returns" },
-                { title: "Benchmarks" },
-                { title: "Attribution" },
+                { title: "Retornos" },
+                { title: "Referências" },
+                { title: "Atribuição" },
               ],
             },
             {
-              title: "Allocation",
+              title: "Alocação",
               icon: PieChart,
               items: [
-                { title: "By asset class" },
-                { title: "By sector" },
-                { title: "By geography" },
+                { title: "Por classe de ativo" },
+                { title: "Por setor" },
+                { title: "Por região" },
               ],
             },
           ],
         },
         {
-          label: "Accounts",
+          label: "Contas",
           items: [
             {
-              title: "Cash & balances",
+              title: "Caixa e saldos",
               icon: Wallet,
               items: [
-                { title: "Available cash" },
-                { title: "Pending" },
-                { title: "Margin" },
+                { title: "Caixa disponível" },
+                { title: "Pendente" },
+                { title: "Margem" },
               ],
             },
             {
-              title: "Transactions",
+              title: "Transações",
               icon: CreditCard,
               items: [
-                { title: "Deposits" },
-                { title: "Withdrawals" },
-                { title: "Trades" },
+                { title: "Depósitos" },
+                { title: "Saques" },
+                { title: "Negociações" },
               ],
             },
             {
-              title: "Statements",
+              title: "Extratos",
               icon: History,
               items: [
-                { title: "Monthly" },
-                { title: "Annual" },
-                { title: "Tax documents" },
+                { title: "Mensal" },
+                { title: "Anual" },
+                { title: "Documentos fiscais" },
               ],
             },
           ],
@@ -321,57 +321,57 @@ export const sidebarConfig: SidebarConfig = {
     },
 
     market: {
-      title: "Market",
-      description: "Live quotes, news & movers",
+      title: "Mercado",
+      description: "Cotações ao vivo, notícias e destaques",
       groups: [
         {
           items: [
             {
-              title: "Overview",
+              title: "Visão geral",
               icon: Gauge,
               items: [
-                { title: "Indices" },
-                { title: "Currencies" },
+                { title: "Índices" },
+                { title: "Moedas" },
                 { title: "Commodities" },
               ],
             },
             {
-              title: "Movers",
+              title: "Destaques",
               icon: TrendingUp,
               items: [
-                { title: "Top gainers" },
-                { title: "Top losers" },
-                { title: "Most active" },
+                { title: "Maiores altas" },
+                { title: "Maiores baixas" },
+                { title: "Mais negociadas" },
               ],
             },
             {
-              title: "Sectors",
+              title: "Setores",
               icon: PieChart,
               items: [
-                { title: "Technology" },
-                { title: "Healthcare" },
-                { title: "Financials" },
-                { title: "Energy" },
+                { title: "Tecnologia" },
+                { title: "Saúde" },
+                { title: "Financeiro" },
+                { title: "Energia" },
               ],
             },
           ],
         },
         {
-          label: "Discover",
+          label: "Descobrir",
           items: [
             {
-              title: "News",
+              title: "Notícias",
               icon: Newspaper,
               items: [
-                { title: "Top stories" },
-                { title: "By symbol" },
-                { title: "Earnings" },
+                { title: "Principais notícias" },
+                { title: "Por ativo" },
+                { title: "Resultados" },
               ],
             },
             {
-              title: "Watchlist",
+              title: "Lista de acompanhamento",
               icon: Star,
-              items: [{ title: "Default" }, { title: "Custom lists" }],
+              items: [{ title: "Padrão" }, { title: "Listas personalizadas" }],
             },
           ],
         },
@@ -379,52 +379,52 @@ export const sidebarConfig: SidebarConfig = {
     },
 
     trading: {
-      title: "Trading",
-      description: "Orders, positions & execution",
+      title: "Negociação",
+      description: "Ordens, posições e execução",
       groups: [
         {
           items: [
             {
-              title: "Order ticket",
+              title: "Boleta de ordem",
               icon: Send,
               items: [
-                { title: "Buy" },
-                { title: "Sell" },
-                { title: "Advanced" },
+                { title: "Compra" },
+                { title: "Venda" },
+                { title: "Avançado" },
               ],
             },
             {
-              title: "Open positions",
+              title: "Posições abertas",
               icon: CandlestickChart,
               items: [
-                { title: "By symbol" },
-                { title: "By strategy" },
-                { title: "Closed today" },
+                { title: "Por ativo" },
+                { title: "Por estratégia" },
+                { title: "Encerradas hoje" },
               ],
             },
             {
-              title: "Order history",
+              title: "Histórico de ordens",
               icon: History,
               items: [
-                { title: "Filled" },
-                { title: "Working" },
-                { title: "Cancelled" },
+                { title: "Executadas" },
+                { title: "Em aberto" },
+                { title: "Canceladas" },
               ],
             },
           ],
         },
         {
-          label: "Strategy",
+          label: "Estratégia",
           items: [
             {
-              title: "Targets",
+              title: "Alvos",
               icon: Target,
-              items: [{ title: "Price targets" }, { title: "Stop losses" }],
+              items: [{ title: "Preços-alvo" }, { title: "Stop loss" }],
             },
             {
-              title: "Risk limits",
+              title: "Limites de risco",
               icon: Shield,
-              items: [{ title: "Per position" }, { title: "Per account" }],
+              items: [{ title: "Por posição" }, { title: "Por conta" }],
             },
           ],
         },
@@ -432,29 +432,29 @@ export const sidebarConfig: SidebarConfig = {
     },
 
     stocks: {
-      title: "Stocks",
-      description: "Screened symbols & lists",
+      title: "Ações",
+      description: "Ativos filtrados e listas",
       groups: [
         {
           items: [
             {
-              title: "All stocks",
+              title: "Todas as ações",
               icon: CandlestickChart,
               items: [
-                { title: "By exchange" },
-                { title: "By sector" },
-                { title: "By market cap" },
+                { title: "Por bolsa" },
+                { title: "Por setor" },
+                { title: "Por valor de mercado" },
               ],
             },
             {
-              title: "Watchlist",
+              title: "Lista de acompanhamento",
               icon: Star,
-              items: [{ title: "Default" }, { title: "Custom" }],
+              items: [{ title: "Padrão" }, { title: "Personalizada" }],
             },
             {
-              title: "Saved screens",
+              title: "Filtros salvos",
               icon: Bookmark,
-              items: [{ title: "My screens" }, { title: "Templates" }],
+              items: [{ title: "Meus filtros" }, { title: "Modelos" }],
             },
           ],
         },
@@ -463,27 +463,27 @@ export const sidebarConfig: SidebarConfig = {
 
     scanner: {
       title: "Scanner",
-      description: "Build and run market scans",
+      description: "Crie e execute varreduras de mercado",
       groups: [
         {
           items: [
-            { title: "New scan", icon: Plus },
+            { title: "Nova varredura", icon: Plus },
             {
-              title: "Filters",
+              title: "Filtros",
               icon: Filter,
               items: [
-                { title: "Price & volume" },
-                { title: "Fundamentals" },
-                { title: "Technicals" },
+                { title: "Preço e volume" },
+                { title: "Fundamentos" },
+                { title: "Indicadores técnicos" },
               ],
             },
             {
-              title: "Recent scans",
+              title: "Varreduras recentes",
               icon: History,
               items: [
-                { title: "Today" },
-                { title: "This week" },
-                { title: "Saved" },
+                { title: "Hoje" },
+                { title: "Esta semana" },
+                { title: "Salvas" },
               ],
             },
           ],
@@ -492,55 +492,55 @@ export const sidebarConfig: SidebarConfig = {
     },
 
     analytics: {
-      title: "Analytics",
-      description: "Reports, metrics & insights",
+      title: "Análises",
+      description: "Relatórios, métricas e insights",
       groups: [
         {
           items: [
             {
-              title: "Dashboards",
+              title: "Painéis",
               icon: Gauge,
               items: [
-                { title: "Sales" },
-                { title: "Operations" },
-                { title: "Finance" },
+                { title: "Vendas" },
+                { title: "Operações" },
+                { title: "Financeiro" },
               ],
             },
             {
-              title: "Performance",
+              title: "Desempenho",
               icon: TrendingUp,
               items: [
-                { title: "Trends" },
-                { title: "Comparisons" },
-                { title: "Forecasts" },
+                { title: "Tendências" },
+                { title: "Comparações" },
+                { title: "Previsões" },
               ],
             },
             {
-              title: "Breakdown",
+              title: "Detalhamento",
               icon: PieChart,
               items: [
-                { title: "By product" },
-                { title: "By region" },
-                { title: "By channel" },
+                { title: "Por produto" },
+                { title: "Por região" },
+                { title: "Por canal" },
               ],
             },
           ],
         },
         {
-          label: "Reports",
+          label: "Relatórios",
           items: [
             {
-              title: "Saved reports",
+              title: "Relatórios salvos",
               icon: Bookmark,
-              items: [{ title: "My reports" }, { title: "Shared" }],
+              items: [{ title: "Meus relatórios" }, { title: "Compartilhados" }],
             },
             {
-              title: "Scheduled",
+              title: "Agendados",
               icon: History,
               items: [
-                { title: "Daily" },
-                { title: "Weekly" },
-                { title: "Monthly" },
+                { title: "Diário" },
+                { title: "Semanal" },
+                { title: "Mensal" },
               ],
             },
           ],
@@ -549,59 +549,59 @@ export const sidebarConfig: SidebarConfig = {
     },
 
     settings: {
-      title: "Settings",
-      description: "Account & workspace preferences",
+      title: "Configurações",
+      description: "Preferências da conta e do ambiente",
       groups: [
         {
           items: [
             {
-              title: "Profile",
+              title: "Perfil",
               icon: User,
               items: [
-                { title: "Personal info" },
-                { title: "Preferences" },
-                { title: "Sessions" },
+                { title: "Informações pessoais" },
+                { title: "Preferências" },
+                { title: "Sessões" },
               ],
             },
             {
-              title: "Notifications",
+              title: "Notificações",
               icon: Bell,
               items: [
-                { title: "Email" },
+                { title: "E-mail" },
                 { title: "Push" },
-                { title: "In-app" },
+                { title: "No aplicativo" },
               ],
             },
             {
-              title: "Security",
+              title: "Segurança",
               icon: Shield,
               items: [
-                { title: "Password" },
-                { title: "Two-factor auth" },
-                { title: "API keys" },
+                { title: "Senha" },
+                { title: "Autenticação em dois fatores" },
+                { title: "Chaves de API" },
               ],
             },
           ],
         },
         {
-          label: "Workspace",
+          label: "Ambiente",
           items: [
             {
-              title: "Members",
+              title: "Membros",
               icon: Users,
               items: [
-                { title: "Active" },
-                { title: "Invited" },
-                { title: "Roles" },
+                { title: "Ativos" },
+                { title: "Convidados" },
+                { title: "Funções" },
               ],
             },
             {
-              title: "Billing",
+              title: "Cobrança",
               icon: CreditCard,
               items: [
-                { title: "Plan" },
-                { title: "Invoices" },
-                { title: "Payment methods" },
+                { title: "Plano" },
+                { title: "Faturas" },
+                { title: "Formas de pagamento" },
               ],
             },
           ],
@@ -610,29 +610,29 @@ export const sidebarConfig: SidebarConfig = {
     },
 
     invite: {
-      title: "Invite",
-      description: "Grow your team",
+      title: "Convidar",
+      description: "Aumente sua equipe",
       groups: [
         {
           items: [
             {
-              title: "Invite people",
+              title: "Convidar pessoas",
               icon: Send,
               items: [
-                { title: "By email" },
-                { title: "Invite link" },
-                { title: "Bulk import" },
+                { title: "Por e-mail" },
+                { title: "Link de convite" },
+                { title: "Importação em massa" },
               ],
             },
             {
-              title: "Pending invites",
+              title: "Convites pendentes",
               icon: History,
-              items: [{ title: "Sent" }, { title: "Expired" }],
+              items: [{ title: "Enviados" }, { title: "Expirados" }],
             },
             {
-              title: "Members",
+              title: "Membros",
               icon: Users,
-              items: [{ title: "Active" }, { title: "Roles" }],
+              items: [{ title: "Ativos" }, { title: "Funções" }],
             },
           ],
         },
@@ -640,33 +640,33 @@ export const sidebarConfig: SidebarConfig = {
     },
 
     support: {
-      title: "Support",
-      description: "Help, docs & contact",
+      title: "Suporte",
+      description: "Ajuda, documentação e contato",
       groups: [
         {
           items: [
             {
-              title: "Help center",
+              title: "Central de ajuda",
               icon: Bookmark,
               items: [
-                { title: "Getting started" },
-                { title: "Guides" },
-                { title: "FAQ" },
+                { title: "Primeiros passos" },
+                { title: "Guias" },
+                { title: "Perguntas frequentes" },
               ],
             },
             {
-              title: "Contact us",
+              title: "Fale conosco",
               icon: Send,
               items: [
-                { title: "Email" },
-                { title: "Live chat" },
-                { title: "Phone" },
+                { title: "E-mail" },
+                { title: "Chat ao vivo" },
+                { title: "Telefone" },
               ],
             },
             {
-              title: "What's new",
+              title: "Novidades",
               icon: Newspaper,
-              items: [{ title: "Releases" }, { title: "Roadmap" }],
+              items: [{ title: "Lançamentos" }, { title: "Planejamento" }],
             },
           ],
         },
@@ -685,7 +685,9 @@ export const DASHBOARD_ROOT = "/dashboard"
 function slugify(value: string): string {
   return value
     .toLowerCase()
-    .replace(/&/g, " and ")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/&/g, " e ")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "")
 }

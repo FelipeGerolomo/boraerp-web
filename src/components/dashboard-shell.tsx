@@ -38,7 +38,7 @@ export function SidebarToggle({ className }: { className?: string }) {
       size="icon-sm"
       variant="ghost"
       onClick={toggle}
-      aria-label={open ? "Collapse sidebar" : "Expand sidebar"}
+      aria-label={open ? "Recolher barra lateral" : "Expandir barra lateral"}
       aria-pressed={open}
       className={cn("text-muted-foreground", className)}
     >

@@ -23,6 +23,6 @@ export async function POST(
 
     return NextResponse.json(response)
   } catch (error) {
-    return handleProductRouteError(error, "Unable to activate product")
+    return handleProductRouteError(error, "Não foi possível ativar o produto")
   }
 }

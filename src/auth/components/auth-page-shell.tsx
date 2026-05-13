@@ -42,19 +42,20 @@ export function AuthPageShell({
                 Bora ERP
               </p>
               <h2 className="max-w-sm text-3xl font-semibold leading-tight">
-                Financial operations in one secure workspace.
+                Operações financeiras em um único ambiente seguro.
               </h2>
               <p className="max-w-sm text-sm text-muted-foreground">
-                Manage invoices, receivables, and company cashflow across all
-                your entities with confidence.
+                Gerencie notas fiscais, contas a receber e o fluxo de caixa de
+                todas as suas empresas com confiança.
               </p>
             </div>
             <div className="grid gap-3 rounded-2xl border bg-background p-4">
               <p className="text-sm font-medium">
-                Trusted by growing businesses
+                Escolhido por empresas em crescimento
               </p>
               <p className="text-sm text-muted-foreground">
-                Sign in once and switch companies safely whenever needed.
+                Entre uma vez e troque de empresa com segurança sempre que
+                precisar.
               </p>
             </div>
           </div>

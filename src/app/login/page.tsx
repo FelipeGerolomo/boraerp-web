@@ -16,8 +16,8 @@ export default async function LoginPage() {
 
   return (
     <AuthPageShell
-      title="Welcome back"
-      description="Login to access your company data securely."
+      title="Bem-vindo de volta"
+      description="Acesse os dados da sua empresa com segurança."
     >
       <LoginForm />
     </AuthPageShell>
